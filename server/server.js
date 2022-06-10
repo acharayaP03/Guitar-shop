@@ -3,9 +3,22 @@ const express = require('express');
 const mongoose = require('mongoose');
 const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
-const app = express();
+require('dotenv').config();
+const dbConnection = require('./services/db');
 
+const app = express();
 const routes = require('./routes');
+
+/**
+ * DB connection
+ */
+
+//const mongoUri = `mongodb+srv://${process.env.DB_ADMIN}:${process.env.DB_PASS}@${process.env.DB_HOST}/?retryWrites=true&w=majority`
+const mongoUri = process.env.DATABASE.replace('<password>', process.env.DB_PASS)
+dbConnection(mongoUri)
+
+mongoose.Promise = global.Promise;
+
 /**
  * @middlewares
  */
