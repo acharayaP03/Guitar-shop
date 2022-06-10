@@ -1,10 +1,20 @@
+const { User } = require("../models/user");
 
-const helloService = async () =>{
+const createUser = async (email, password) =>{
     try {
-        return 'hello'
+
+        if(await User.emailTaken(email)){
+            console.log('user already Exist')
+        }
+        const user = new User({
+            email, 
+            password
+        });
+        await user.save();
+        return user;
     } catch (error) {
-        new Error('opp server ran into issue...')
+        throw new Error('Opps, problem creating user.')
     }
 }
 
-module.exports = {helloService};
+module.exports = {createUser};
