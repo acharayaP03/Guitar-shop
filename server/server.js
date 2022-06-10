@@ -5,12 +5,20 @@ const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
 const app = express();
 
+const routes = require('./routes');
 /**
  * @middlewares
  */
+app.use(express.json()); // data sent from client, previously bodyParser.
+
 app.use(xss()) // prevents script from executing in the server.
 app.use(mongoSanitize());
 
+/**
+ * Ensure every thing related to routes has be after sanitization.
+ */
+
+app.use('/api',routes)
 /**
  * @Port
  */
