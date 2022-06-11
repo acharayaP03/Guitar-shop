@@ -4,7 +4,9 @@ const mongoose = require('mongoose');
 const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
 require('dotenv').config();
+
 const dbConnection = require('./services/db');
+const { handleError } = require('./middleware/apiError')
 
 const app = express();
 const routes = require('./routes');
@@ -35,6 +37,12 @@ app.use('/api',routes)
 /**
  * @Port
  */
+
+
+app.use((err, req, res, next) =>{
+    handleError( err, res)
+})
+
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () =>{

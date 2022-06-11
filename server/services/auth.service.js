@@ -1,5 +1,6 @@
 const { User } = require("../models/user");
-
+const httpStatus = require('http-status');
+const { ApiError } = require("../middleware/apiError");
 /**
  * 
  * @param {*} email request 
@@ -10,7 +11,7 @@ const createUser = async (email, password) =>{
     try {
 
         if(await User.emailTaken(email)){
-            console.log('user already Exist')
+            throw new ApiError( httpStatus.BAD_REQUEST, 'Sorry, that email is already taken.')
         }
         const user = new User({
             email, 
@@ -19,7 +20,7 @@ const createUser = async (email, password) =>{
         await user.save();
         return user;
     } catch (error) {
-        throw new Error('Opps, problem creating user.')
+        throw error
     }
 }
 

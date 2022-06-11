@@ -1,4 +1,5 @@
 const {authServices} = require('../services')
+const httpStatus = require('http-status')
 
 const authController = {
 
@@ -20,11 +21,11 @@ const authController = {
             const token = await authServices.genAuthToken(user);
             
             //save token generated from user schema methods
-            res.cookie('x-access-token', token).status(200).send({
+            res.cookie('x-access-token', token).status(httpStatus.CREATED).send({
                 user, token
             })
         } catch (error) {
-            console.log(error)
+            next(error)
         }
         
     },

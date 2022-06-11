@@ -12,6 +12,7 @@ class ApiError extends Error {
 
 const handleError = (err, res) =>{
     const { statusCode, message } = err;
+    console.log('STATUS CODE FROM APIERROR: ', statusCode, message);
     res.status(statusCode).json({
         status: 'error',
         statusCode,
