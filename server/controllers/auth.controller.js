@@ -31,9 +31,17 @@ const authController = {
     },
     async signin(req, res, next){
         try {
+            const { email, password } = req.body
+            const user = await authServices.signInWithEmailAndPassword(email, password);
+            const token = await authServices.genAuthToken(user);
             
+            //save token generated from user schema methods
+            res.cookie('x-access-token', token).send({
+                user, token
+            })
+            res.send( { user })
         } catch (error) {
-            
+            next(error)
         }
     },
     async isAuthenticated(req, res, next){
