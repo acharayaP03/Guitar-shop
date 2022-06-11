@@ -1,6 +1,7 @@
 const { User } = require("../models/user");
 const httpStatus = require('http-status');
 const { ApiError } = require("../middleware/apiError");
+const userService = require('../services/user.service')
 /**
  * 
  * @param {*} email request 
@@ -34,4 +35,19 @@ const genAuthToken = (user) =>{
     return token;
 }
 
-module.exports = {createUser, genAuthToken};
+const signInWithEmailAndPassword = async (email, password) =>{
+    try {
+        const user = await userService.findUserByEmail(email)
+        if(!user){
+            throw new ApiError( httpStatus.UNAUTHORIZED, 'Sorry, email not found.')
+        }
+        if(!(await user.comaprePassword(password))){
+            throw new ApiError( httpStatus.UNAUTHORIZED, 'Sorry, bad password.')
+        }
+        return user;
+    } catch (error) {
+        throw error;
+    }
+}
+
+module.exports = {createUser, genAuthToken, signInWithEmailAndPassword};

@@ -38,6 +38,7 @@ app.use('/api',routes)
 /**
  * Api error handelling middlewares.
  * if error is not recognized ... then convert that into api error.
+ * @conertToApiError checks weather error is an instance of api error or mongoose. 
  */
 app.use(convertToApiError)
 

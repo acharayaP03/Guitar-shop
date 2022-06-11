@@ -96,6 +96,18 @@ userSchema.methods.generateAuthToken = function(){
 }
 
 /**
+ * this will check if the password user entered is correct or not. 
+ * @bcrypt provides a way to comparing hashed password where we can compare @candidate password to existing password in db
+ * @param {*} passward 
+ * @returns Boolean either true or false 
+ */
+userSchema.methods.comaprePassword = async function(candidatePassword){
+    const user = this;
+    const match = await bcrypt.compare(candidatePassword, user.password);
+    return match;
+}
+
+/**
  * 
  * @param {*} email check user entered email before saving it to MongoDb
  * @returns Boolean
