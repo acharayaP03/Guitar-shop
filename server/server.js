@@ -6,7 +6,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 require('dotenv').config();
 
 const dbConnection = require('./services/db');
-const { handleError } = require('./middleware/apiError')
+const { handleError, convertToApiError } = require('./middleware/apiError')
 
 const app = express();
 const routes = require('./routes');
@@ -34,15 +34,20 @@ app.use(mongoSanitize());
  */
 
 app.use('/api',routes)
-/**
- * @Port
- */
 
+/**
+ * Api error handelling middlewares.
+ * if error is not recognized ... then convert that into api error.
+ */
+app.use(convertToApiError)
 
 app.use((err, req, res, next) =>{
     handleError( err, res)
 })
 
+/**
+ * @Port
+ */
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () =>{
