@@ -71,19 +71,23 @@ userSchema.pre('save', async function(next){
     if(user.isModified('password')){
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(user.password, salt);
+        user.password = hash;
     }
 
-    user.password = hash;
     next();
 });
 
-
+/**
+ * The reason we create methods instead of statics is, at the this point in time, user doesnt exist on out db.
+ * Static are called before the user instance exists. 
+ * this needs to happen at after we save user then call this method to generate this token.
+ * @returns user token that allows user to stay signed in 
+ */
 userSchema.methods.generateAuthToken = function(){
     let user = this;
     console.log(user)
-    const userObj = { 
-        sub: user._id.toHexSting()
-    }
+    const userObj = { sub: user._id.toHexString()}
+
     const token = jwt.sign( userObj, process.env.DB_SECRET, {
         expiresIn: '1d'
     });
