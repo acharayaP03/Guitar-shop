@@ -45,11 +45,7 @@ const authController = {
         }
     },
     async isAuthenticated(req, res, next){
-        try {
-            
-        } catch (error) {
-            
-        }
+        res.json(req.user)
     }
 }
 
