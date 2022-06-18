@@ -7,10 +7,10 @@ require('dotenv').config();
 
 const dbConnection = require('./services/db');
 const { handleError, convertToApiError } = require('./middleware/apiError')
-
+const { jwtStrategy } = require('./middleware/passport')
 const app = express();
 const routes = require('./routes');
-
+const passport = require('passport');
 /**
  * DB connection
  */
@@ -29,6 +29,12 @@ app.use(express.json()); // data sent from client, previously bodyParser.
 app.use(xss()) // prevents script from executing in the server.
 app.use(mongoSanitize());
 
+/**
+ * passport init
+ */
+
+app.use(passport.initialize())
+passport.use('jwt', jwtStrategy)
 /**
  * Ensure every thing related to routes has be after sanitization.
  */
