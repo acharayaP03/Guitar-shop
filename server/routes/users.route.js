@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
-const {profile} = require('../controllers/users.controller');
+const {profile, updateProfile} = require('../controllers/users.controller');
 
 
 
@@ -10,6 +10,6 @@ const {profile} = require('../controllers/users.controller');
  */
 router.route('/profile')
 .get(auth('readOwn', 'profile'), profile)
-
+.patch(auth('updateOwn', 'profile'), updateProfile)
 
 module.exports = router;

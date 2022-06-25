@@ -1,10 +1,15 @@
 const {userServices} = require('../services')
 const httpStatus = require('http-status');
 const { ApiError } = require('../middleware/apiError')
+
+
+const { findUserById, updateUserProfile} = userServices;
+
+
 const usersController = {
     async profile ( req,res, next){
         try {
-            const user = await userServices.findUserById(req.user._id)
+            const user = await findUserById(req.user._id)
             if(!user){
                 throw new ApiError(httpStatus.NOT_FOUND, 'User not found.');
             }
@@ -22,6 +27,14 @@ const usersController = {
             const permited = res.locals.permission.filter(user._doc);
 
             res.json(permited)
+        } catch (error) {
+            next(error)
+        }
+    },
+    async updateProfile(req, res, next) {
+        try {
+            const user = await updateUserProfile(req)
+            return res.json(user)
         } catch (error) {
             next(error)
         }
