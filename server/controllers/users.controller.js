@@ -1,10 +1,10 @@
-const {userServices} = require('../services')
+const {userServices, authServices} = require('../services')
 const httpStatus = require('http-status');
 const { ApiError } = require('../middleware/apiError')
 
 
-const { findUserById, updateUserProfile} = userServices;
-
+const { findUserById, updateUserProfile, updateUserEmail} = userServices;
+const {genAuthToken } = authServices;
 
 const usersController = {
     async profile ( req,res, next){
@@ -35,6 +35,28 @@ const usersController = {
         try {
             const user = await updateUserProfile(req)
             return res.json(user)
+        } catch (error) {
+            next(error)
+        }
+    },
+
+    /**
+     * Few things we need to do before we update user email.
+     * we need to varify them by sending new token to their email. then this change will be done.
+     * @param {*} req request object
+     * @param {*} res response sent to user
+     * @param {*} next middleware 
+     */
+    async updateUserEmailController(req, res, next){
+        try {
+
+            const user = await updateUserEmail(req);
+            const token = await genAuthToken(user);
+
+            //send email to varify acctount
+            res.cookie('x-access-token', token).send({
+                user, token
+            })
         } catch (error) {
             next(error)
         }
