@@ -5,18 +5,23 @@
  */
 
 const AccessControl = require('accesscontrol');
-
+const allRights = {
+        'create:any': ['*'],
+        'read:any': ['*'],
+        'update:any': ['*'],
+        'delete:any': ['*']
+    }
 
 let grantObject ={
     admin: {
-        dog:{
-            'create:any': ['*'],
-            'read:any': ['*'],
-            'update:any': ['*'],
-            'delete:any': ['*']
-        }
+        profile: allRights
     },
-    user: {}
+    user: {
+        profile:{
+            'read:own': ['*' ,'!password', '!_id'], // controlling what user will see, ids and password is not needed.
+            'update:own': ['*']
+        }
+    }
 }
 
 const roles = new AccessControl(grantObject);

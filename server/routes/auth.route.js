@@ -8,7 +8,6 @@ const {register, signin, isAuthenticated, dog } = authController;
 router.post('/register',register)
 router.post('/signin',signin)
 router.get('/isauthenticated', auth(), isAuthenticated) // checks if user is validated..
-router.get('/dog',auth('createAny', 'dog'), dog);
 
 
 module.exports = router;
