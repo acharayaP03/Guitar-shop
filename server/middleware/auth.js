@@ -35,11 +35,9 @@
  }
 
 
-
-
  /**
   * @auth will compare token that was generated during user signin or register action.
-  * 
+  * must return @Promise since we have to check user and verify them if they are valid.
   * @param  {...any} rights 
   * @returns valid token 
   */
