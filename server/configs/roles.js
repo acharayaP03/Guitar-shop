@@ -18,7 +18,7 @@ let grantObject ={
     },
     user: {
         profile:{
-            'read:own': ['*'],
+            'read:own': ['*' ,'!password', '!_id'], // controlling what user will see, ids and password is not needed.
             'update:own': ['*']
         }
     }
