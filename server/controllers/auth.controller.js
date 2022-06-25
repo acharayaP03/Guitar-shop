@@ -46,6 +46,9 @@ const authController = {
     },
     async isAuthenticated(req, res, next){
         res.json(req.user)
+    },
+    async dog(req, res, next){
+        res.json({ ok: 'yes'})
     }
 }
 
