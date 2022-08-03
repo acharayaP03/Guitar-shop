@@ -86,7 +86,7 @@ userSchema.pre('save', async function(next){
 userSchema.methods.generateAuthToken = function(){
     let user = this;
     console.log(user)
-    const userObj = { sub: user._id.toHexString()}
+    const userObj = { sub: user._id.toHexString(), email: user.email}
 
     const token = jwt.sign( userObj, process.env.DB_SECRET, {
         expiresIn: '1d'
@@ -107,6 +107,15 @@ userSchema.methods.comaprePassword = async function(candidatePassword){
     return match;
 }
 
+/**
+ * here we will send user an email to verify their account.
+ * */
+userSchema.methods.generateRegisterToken = function (){
+    let user = this;
+    const userObj = { sub: user._id.toHexString() };
+    const token = jwt.sign( userObj, process.env.DB_SECRET, { expiresIn: '10h' });
+    return token;
+}
 /**
  * 
  * @param {*} email check user entered email before saving it to MongoDb
