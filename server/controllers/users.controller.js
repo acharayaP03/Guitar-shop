@@ -1,9 +1,9 @@
-const {userServices, authServices} = require('../services')
+const {userServices, authServices, emailService} = require('../services')
 const httpStatus = require('http-status');
 const { ApiError } = require('../middleware/apiError')
 
 
-const { findUserById, updateUserProfile, updateUserEmail} = userServices;
+const { findUserById, updateUserProfile, updateUserEmail, } = userServices;
 const {genAuthToken } = authServices;
 
 const usersController = {
@@ -53,11 +53,33 @@ const usersController = {
             const user = await updateUserEmail(req);
             const token = await genAuthToken(user);
 
-            //send email to varify acctount
+            //send email to varify account
+            await emailService.registerEmail(user.email, user);
+
             res.cookie('x-access-token', token).send({
                 user, token
             })
         } catch (error) {
+            next(error)
+        }
+    },
+
+    async verifyAccount(req, res, next){
+        try{
+            const token = await userServices.validateToken(req.query.validation);
+            const user = await userServices.findUserById(token.sub);
+
+            if (!user) throw new ApiError(httpStatus.NOT_FOUND, 'User not found.');
+            if (user.varified) throw  new ApiError(httpStatus.BAD_REQUEST, 'User is already varified.')
+
+            user.varified = true;
+
+            user.save();
+            res.status( httpStatus.CREATED).send({
+                user,
+                token
+            })
+        }catch (error){
             next(error)
         }
     }

@@ -1,4 +1,4 @@
-const {authServices} = require('../services')
+const {authServices, emailService} = require('../services')
 const httpStatus = require('http-status')
 
 const authController = {
@@ -19,7 +19,9 @@ const authController = {
 
             const user = await authServices.createUser(email, password);
             const token = await authServices.genAuthToken(user);
-            
+            // send email
+            await emailService.registerEmail(email, user);
+
             //save token generated from user schema methods
             res.cookie('x-access-token', token).status(httpStatus.CREATED).send({
                 user, token
