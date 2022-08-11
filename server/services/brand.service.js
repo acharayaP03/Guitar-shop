@@ -36,8 +36,34 @@ const deleteBrandById = async (id) =>{
     }
 }
 
+/**
+ * here we need to return brands and limit its response like 10 per page or so.
+ * @args will have all the params that was sent by user
+ * @returns {Promise<void>}
+ */
+const getBrands = async (args) =>{
+    try {
+        //if user passes empty args by chance
+        let order = args.order ? args.order : "asc";
+        let limit = args.limit ? args.limit : 5;
+
+        const brands = await Brand
+            .find({})
+            .sort([
+                ['_id', order]
+            ])
+            .limit(limit)
+        if(!brands) throw new ApiError(httpStatus.NOT_FOUND, 'Brands not found...!');
+
+        return brands;
+    }catch (error){
+        throw error;
+    }
+}
+
 module.exports = {
     addBrand,
     getBrandById,
-    deleteBrandById
+    deleteBrandById,
+    getBrands
 }

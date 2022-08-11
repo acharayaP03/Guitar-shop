@@ -13,4 +13,10 @@ router.route('/brand/:id')
     .get(brandController.getBrand)
     .delete( auth('deleteAny', 'brand'), brandController.deleteBrandById)
 
+/**
+ * @get all brands
+ * */
+
+router.get('/all', brandController.getAllBrands);
+
 module.exports = router;
