@@ -23,6 +23,16 @@ const brandControllers = {
         }catch (error){
             next(error);
         }
+    },
+    async deleteBrandById(req, res, next){
+        try{
+            const id = req.params.id;
+            const brand = await brandService.deleteBrandById(id);
+
+            res.json(brand);
+        }catch (error){
+            next(error);
+        }
     }
 }
 
