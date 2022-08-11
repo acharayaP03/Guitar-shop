@@ -26,8 +26,6 @@ let grantObject ={
     }
 }
 
-const roles = new AccessControl();
-roles.setGrants(grantObject)
+const roles = new AccessControl(grantObject);
 
-console.log(roles.getGrants())
 module.exports = { roles }
