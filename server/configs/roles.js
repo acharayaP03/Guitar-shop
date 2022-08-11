@@ -1,7 +1,7 @@
 /**
  * @params admin<any>, user<specified>
- * 
- * @return User specified roles 
+ *
+ * @return User specified roles
  */
 
 const AccessControl = require('accesscontrol');
@@ -14,16 +14,20 @@ const allRights = {
 
 let grantObject ={
     admin: {
-        profile: allRights
+        profile: allRights,
+        brand: allRights
     },
     user: {
         profile:{
             'read:own': ['*' ,'!password', '!_id'], // controlling what user will see, ids and password is not needed.
             'update:own': ['*']
-        }
+        },
+        brand: { 'read:any': ['*'] }
     }
 }
 
-const roles = new AccessControl(grantObject);
+const roles = new AccessControl();
+roles.setGrants(grantObject)
 
+console.log(roles.getGrants())
 module.exports = { roles }
