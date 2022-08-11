@@ -33,6 +33,14 @@ const brandControllers = {
         }catch (error){
             next(error);
         }
+    },
+    async getAllBrands(req, res, next){
+        try{
+            const brands = await brandService.getBrands(req.body);
+            res.json(brands)
+        }catch (error){
+            next(error);
+        }
     }
 }
 
