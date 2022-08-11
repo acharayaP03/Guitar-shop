@@ -1,8 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const { addBrand } = require('../controllers/brand.controller')
+
+const brandController = require('../controllers/brand.controller')
 const auth = require('../middleware/auth');
 
-router.post('/brand', auth('createAny', 'brand'), addBrand)
+
+router.post('/brand', auth('createAny', 'brand'), brandController.addBrand)
+/**
+ * @get brand by id route
+ */
+router.route('/brand/:id')
+    .get(brandController.getBrand)
 
 module.exports = router;
