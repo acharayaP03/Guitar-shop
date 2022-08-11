@@ -16,6 +16,10 @@ const routesIndex = [
     {
         path: '/brands',
         route: brands
+    },
+    {
+        path: '/brands/:id',
+        route: brands
     }
 ];
 
