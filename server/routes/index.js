@@ -3,7 +3,7 @@ const router = express.Router(); //create router instance
 const authRoute = require('./auth.route');
 const usersRoute = require('./users.route');
 const brands = require('../routes/brand.route');
-
+const productRoute = require('../routes/product.route');
 const routesIndex = [
     {
         path: '/auth',
@@ -17,6 +17,10 @@ const routesIndex = [
         path: '/brands',
         route: brands
     },
+    {
+        path: '/products',
+        route: productRoute
+    }
 ];
 
 routesIndex.forEach((route) =>{
