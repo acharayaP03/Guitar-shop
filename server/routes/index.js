@@ -4,6 +4,7 @@ const authRoute = require('./auth.route');
 const usersRoute = require('./users.route');
 const brands = require('../routes/brand.route');
 const productRoute = require('../routes/product.route');
+const siteRoute = require('../routes/site.route.js')
 const routesIndex = [
     {
         path: '/auth',
@@ -20,6 +21,10 @@ const routesIndex = [
     {
         path: '/products',
         route: productRoute
+    },
+    {
+        path: '/site',
+        route: siteRoute
     }
 ];
 
