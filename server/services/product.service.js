@@ -61,9 +61,19 @@ const deleteProductById = async( _id  ) => {
     }
 }
 
+const getAllProducts = async( _id  ) => {
+    try {
+        const products = await Product.find({});
+        return products
+    } catch(error) {
+        throw error
+    }
+}
+
 module.exports = {
     addProduct,
     getProductById,
     updateProductById,
-    deleteProductById
+    deleteProductById,
+    getAllProducts
 }
