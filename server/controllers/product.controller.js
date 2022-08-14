@@ -38,7 +38,17 @@ const productController = {
         }catch (error) {
             next(error)
         }
-    }
+    },
+
+    async deleteProductById(req,res,next){
+        try{
+            const _id = req.params.id;
+            const product = await productService.deleteProductById(_id);
+            res.json(product)
+        } catch(error){
+            next(error)
+        }
+    },
 };
 
 module.exports = productController

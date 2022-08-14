@@ -14,5 +14,6 @@ router.post('/', auth('createAny', 'product'), addProductValidator, productContr
 router.route('/product/:id')
     .get(productController.getProductById)
     .patch(auth('updateAny', 'product'), productController.updateProductById)
+    .delete(auth('deleteAny', 'product'), productController.deleteProductById)
 
 module.exports = router;

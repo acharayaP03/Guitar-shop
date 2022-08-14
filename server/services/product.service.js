@@ -31,7 +31,11 @@ const getProductById = async (id) =>{
         throw error;
     }
 }
-
+/**
+ * @_id id sent from controller,
+ * $set updates the body of the product.
+ * @returns new Product
+ * */
 const updateProductById = async (_id, body) =>{
     try {
         const product = await Product.findOneAndUpdate(
@@ -47,8 +51,19 @@ const updateProductById = async (_id, body) =>{
     }
 }
 
+const deleteProductById = async( _id  ) => {
+    try {
+        const product = await Product.findByIdAndRemove(_id);
+        if(!product) throw new ApiError(httpStatus.NOT_FOUND, 'Product not found');
+        return product
+    } catch(error) {
+        throw error
+    }
+}
+
 module.exports = {
     addProduct,
     getProductById,
-    updateProductById
+    updateProductById,
+    deleteProductById
 }
