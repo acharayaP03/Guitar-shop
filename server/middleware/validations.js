@@ -10,9 +10,25 @@ const addProductValidator = [
         .isLength({ min: 3}).withMessage('You need to '),
     check('brand')
         .trim().not().isEmpty().withMessage('You need to a add brand.'),
+    check('frets')
+        .trim().not().isEmpty().withMessage('You need to specify frets.'),
+    check('woodtype')
+        .trim().not().isEmpty().withMessage('You need to specify wood type.'),
+    check('description')
+        .trim().not().isEmpty().withMessage('Please add description for this product.').bail()
+        .isLength({ min: 20}).withMessage('Please add more description for this product.'),
     /**
      * @check will validate models, then if any errors, it will pass it to below call back function
+     * @todo add more validators like frets woodtype and description.
      * */
+
+    /**
+     *
+     * @param req
+     * @param res
+     * @param next proceed to next middleware.
+     * @returns {errors}
+     */
     (req,res, next) =>{
         const errors = validationResult(req);
         //if there is any errors, we will send status with error message.
