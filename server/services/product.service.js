@@ -136,6 +136,40 @@ const paginateProduct = async( req ) => {
             })
         }
 
+        //filter by frets
+        if(req.body.min && req.body.min > 0 || req.body.max && req.body.max < 5000){
+
+            if(req.body.min){
+                aggQueryArray.push({
+                    $match : {
+                        price: { $gt: req.body.min }
+                    }
+                })
+            }
+
+            if(req.body.max){
+                aggQueryArray.push({
+                    $match : {
+                        price: { $lt: req.body.max }
+                    }
+                })
+            }
+        }
+
+        //add populate
+        aggQueryArray.push({
+            $lookup:{
+                from: "brands",
+                localField: "brand",
+                foreignField: "_id",
+                as: "brand"
+            }
+        },
+            {
+                $unwind: '$brand' // with out this $unwind, it will return object wrapped in array.
+            }
+        )
+
         let aggQuery = Product.aggregate(aggQueryArray);
         const options = {
             page: 1,
