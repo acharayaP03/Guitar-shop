@@ -1,6 +1,7 @@
 const {Product} = require("../models/product");
 const httpStatus = require("http-status");
 const { ApiError } = require('../middleware/apiError')
+const mongoose = require('mongoose');
 
 const addProduct = async (body) =>{
     try{
@@ -76,11 +77,66 @@ const getAllProducts = async( req  ) => {
     }
 }
 
+/**
+ *
+ * @param req
+ * @returns {Promise<Product>} matching users params
+ *
+ * eg:
+ * const example = {
+ *     "keywords": "user typed keywords",
+ *     "brand" : "id of brand",
+ *     "lt": 200,
+ *     "gt": 500,
+ *     "frets": 24
+ * }
+ */
+
 const paginateProduct = async( req ) => {
     try {
         let aggQueryArray = [];
 
-        let aggQuery = Product.aggregate([]);
+        // filter with keywords.
+
+        if(req.body.keywords && req.body.keywords !== ''){
+            const regex = new RegExp(`${req.body.keywords}`, 'gi');
+            /**
+             * here we are trying to match users request keyword int aggQueryArray to
+             * match with product model/title
+             */
+            aggQueryArray.push({
+                $match: {
+                    model: { $regex: regex }
+                }
+            })
+        }
+
+        // filter with brands
+        if(req.body.brand && req.body.brand.length > 0){
+            let newBrandsArray = req.body.brand.map( (item) => (
+                //convert item into the type of object that mongoose can understand.
+                mongoose.Types.ObjectId(item)
+            ));
+
+            aggQueryArray.push({
+                $match:{
+                    brand: {
+                        $in: newBrandsArray
+                    }
+                }
+            })
+        }
+
+        //filter by frets
+        if(req.body.frets && req.body.frets.length > 0 ){
+            aggQueryArray.push({
+                $match : {
+                    frets: { $in: req.body.frets }
+                }
+            })
+        }
+
+        let aggQuery = Product.aggregate(aggQueryArray);
         const options = {
             page: 1,
             limit: 3,
