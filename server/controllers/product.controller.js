@@ -57,6 +57,16 @@ const productController = {
             next(error)
         }
     },
+
+    async paginateProduct(req, res, next){
+        try{
+            const products = await productService.paginateProduct(req);
+
+            res.json(products)
+        } catch(error){
+            next(error)
+        }
+    },
 };
 
 module.exports = productController

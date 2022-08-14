@@ -18,5 +18,6 @@ router.route('/product/:id')
 
 
 router.get('/all', productController.getAllProducts)
+router.post('/paginate/all', productController.paginateProduct)
 
 module.exports = router;
