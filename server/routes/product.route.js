@@ -11,5 +11,8 @@ router.post('/', auth('createAny', 'product'), addProductValidator, productContr
  * @get all product
  * */
 
-router.get('/product/:id', productController.getProductById);
+router.route('/product/:id')
+    .get(productController.getProductById)
+    .patch(auth('updateAny', 'product'), productController.updateProductById)
+
 module.exports = router;

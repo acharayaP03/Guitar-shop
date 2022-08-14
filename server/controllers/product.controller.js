@@ -9,13 +9,30 @@ const productController = {
             next(error);
         }
     },
-
+    /**
+     *
+     * @param req id
+     * @param res
+     * @param next if any error
+     * @returns {Promise<void>} Product by Id
+     */
     async getProductById(req, res, next) {
         try{
             const _id = req.params.id;
             const product = await productService.getProductById(
                 _id
             );
+
+            res.json(product);
+        }catch (error) {
+            next(error)
+        }
+    },
+
+    async updateProductById(req, res, next){
+        try{
+            const _id = req.params.id;
+            const product = await productService.updateProductById(_id, req.body);
 
             res.json(product);
         }catch (error) {
