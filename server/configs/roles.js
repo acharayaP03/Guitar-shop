@@ -15,14 +15,16 @@ const allRights = {
 let grantObject ={
     admin: {
         profile: allRights,
-        brand: allRights
+        brand: allRights,
+        product: allRights
     },
     user: {
         profile:{
             'read:own': ['*' ,'!password', '!_id'], // controlling what user will see, ids and password is not needed.
             'update:own': ['*']
         },
-        brand: { 'read:any': ['*'] }
+        brand: { 'read:any': ['*'] },
+        product: { 'read:any': ['*'] }
     }
 }
 
