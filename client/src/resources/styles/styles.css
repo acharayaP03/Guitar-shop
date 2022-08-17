@@ -422,11 +422,17 @@ footer .business_nfo .nfo {
 /*============================
         FEATURED IMAGE
 ==============================*/
-
+.featured_container{
+    display: block;
+    width: 100%;
+}
 .featured_container .featured_image {
+    display: block;
+    width: 100vw;
+    height: 100%;
     position:relative;
     background-size: cover !important;
-    background-position: center left !important;
+    background-position: center center !important;
 }
 
 .featured_container .featured_action {
