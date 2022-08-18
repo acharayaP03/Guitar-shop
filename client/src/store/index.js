@@ -6,7 +6,10 @@ import appReducers from './reducers';
  * Setup Root Store for app.
  */
 const ReduxStore = () => {
-    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSIONS_COMPOSE__ || compose;
+    const composeEnhancers =   (typeof window !== 'undefined' &&
+            window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+        compose;
+
 
     const store = createStore(
         appReducers,
