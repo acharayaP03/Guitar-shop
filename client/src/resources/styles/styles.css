@@ -429,7 +429,7 @@ footer .business_nfo .nfo {
 .featured_container .featured_image {
     display: block;
     width: 100vw;
-    height: 100%;
+    height: calc(100vh - 400px);
     position:relative;
     background-size: cover !important;
     background-position: center center !important;
