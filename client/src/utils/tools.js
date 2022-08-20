@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-
-import { ImageSearch } from '@material-ui/icons';
+import AddShoppingCartOutlined from "@material-ui/icons/AddShoppingCartOutlined";
+import {CircularProgress} from "@material-ui/core";
 
 export const WavesButton = ( props ) =>{
     let template = '';
@@ -19,6 +19,18 @@ export const WavesButton = ( props ) =>{
                 { props.title }
             </Link>
             break;
+        case 'bag_link':
+            template = <div
+                className="bag_link"
+                onClick={() => {
+                        props.runAction()
+                    }
+                }
+                style={{ ...props.style }}
+            >
+                <AddShoppingCartOutlined style={{ fontSize: props.iconSize }} />
+            </div>
+            break;
         default:
             template='';
     }
@@ -33,3 +45,9 @@ export const renderCardImage = (image) => {
         return '/images/image_not_availble.png'
     }
 }
+
+export const Loader = ({ full }) => (
+    <div className={`root_loader ${full ? 'full': ''}`}>
+        <CircularProgress />
+    </div>
+)

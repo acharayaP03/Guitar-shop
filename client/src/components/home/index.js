@@ -4,6 +4,7 @@ import SlimPromotion from 'utils/promotions/slim.block';
 import CardContainer from "utils/products/card.container";
 import { useDispatch, useSelector } from 'react-redux'
 import { productsBySort} from "../../store/actions/products.action";
+import { Loader} from "utils/tools";
 
 const slimPromotion = {
     img:'/images/featured/featured_home_3.jpg',
@@ -27,7 +28,6 @@ const Home = () => {
         }));
     }, [dispatch]);
 
-    console.log(bySold)
     return(
         <div>
             <Featured/>
@@ -36,8 +36,14 @@ const Home = () => {
                     items={bySold}
                     title="Best selling guitars"
                 />
-                :null}
+                :<Loader />}
             <SlimPromotion items={slimPromotion}/>
+            { byDate ?
+                <CardContainer
+                    items={byDate}
+                    title="Latest Guitar on the shop"
+                />
+                :<Loader />}
         </div>
     )
 
