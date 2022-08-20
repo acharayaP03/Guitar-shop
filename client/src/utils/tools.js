@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
+import { ImageSearch } from '@material-ui/icons';
 
 export const WavesButton = ( props ) =>{
     let template = '';
@@ -23,4 +24,12 @@ export const WavesButton = ( props ) =>{
     }
 
     return template;
+}
+
+export const renderCardImage = (image) => {
+    if(image.length > 0){
+        return image[0]
+    }else{
+        return '/images/image_not_availble.png'
+    }
 }

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Featured from './featured';
 import SlimPromotion from 'utils/promotions/slim.block';
+import CardContainer from "utils/products/card.container";
 import { useDispatch, useSelector } from 'react-redux'
 import { productsBySort} from "../../store/actions/products.action";
 
@@ -13,7 +14,7 @@ const slimPromotion = {
 };
 
 const Home = () => {
-    const { bySold, byDate } = useSelector(state => state.products)
+    const { bySold, byDate} = useSelector(state => state.products)
     const dispatch = useDispatch();
 
     useEffect(() =>{
@@ -24,10 +25,18 @@ const Home = () => {
         dispatch(productsBySort({
             limit:4,sortBy:'date',order:'desc',where:'byDate'
         }));
-    }, [dispatch])
+    }, [dispatch]);
+
+    console.log(bySold)
     return(
         <div>
             <Featured/>
+            { bySold ?
+                <CardContainer
+                    items={bySold}
+                    title="Best selling guitars"
+                />
+                :null}
             <SlimPromotion items={slimPromotion}/>
         </div>
     )

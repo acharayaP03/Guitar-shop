@@ -2,19 +2,19 @@ import React from "react";
 import Card from './card';
 
 
-const CardBlock = ({ items, title, shop, grid }) =>{
-    const renderCards = () =>{
+const CardContainer = ({ items, title, shop, grid }) =>{
+    console.log('from Card container: ',  items)
+    const renderCards = () =>(
         items ?
-            items.map( item =>(
+            items.map( (item) =>(
                 <Card
                     key={item._id}
                     item={item}
                     grid={grid}
                 />
             ))
-            : null;
-    }
-
+            : null
+    )
     return (
         <div className={shop ? 'card_block_shop': 'card_block'}>
             <div className={shop ? '': 'container'}>
@@ -28,11 +28,11 @@ const CardBlock = ({ items, title, shop, grid }) =>{
                     display: 'flex',
                     flexWrap: 'wrap'
                 }}>
-                    { renderCards()}
+                    { renderCards() }
                 </div>
             </div>
         </div>
     )
 }
 
-export default CardBlock;
+export default CardContainer;
