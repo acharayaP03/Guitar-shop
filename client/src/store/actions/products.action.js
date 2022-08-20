@@ -5,7 +5,7 @@ import * as actions from './index'
 export const productsBySort = ({ limit, sortBy, order, where}) =>{
     return async (dispatch) =>{
         try{
-            const product = await axios.get('/api/products/al',{
+            const product = await axios.get('/api/products/all',{
                 params:{
                     limit,
                     sortBy,
