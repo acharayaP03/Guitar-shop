@@ -1,14 +1,16 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { useFormik} from "formik";
 import * as Yup from 'yup';
-import {Loader} from "../utils/tools";
+import {Loader, errorHelper } from "../utils/tools";
 
 import { useDispatch, useSelector} from "react-redux";
 import { TextField, Button} from "@material-ui/core";
-
+import  { userRegister , userSignIn } from 'store/actions/user.action'
 
 const AuthForm = (props) => {
+    const notification = useSelector(state=> state.notification);
     const [loading, setLoading] = useState(false)
+    const  dispatch = useDispatch()
     /**
      * use formik to validate our form.
      */
@@ -22,8 +24,30 @@ const AuthForm = (props) => {
             password: Yup.string()
                 .required('Sorry, password is required.')
         }),
-        onSubmit: (values) => { console.log(values)}
+        onSubmit: (values) => {
+            setLoading(true);
+            handleSubmit(values)
+        }
     })
+
+    const handleSubmit = (values) => {
+        if(props.formType){
+            dispatch(userRegister(values))
+        }else {
+            dispatch(userSignIn(values))
+        }
+    }
+
+    /**
+     * once the user is successfully registered, we will direct them to dash board.
+     */
+    useEffect(()=>{
+        if(notification && notification.success){
+            props.history.push('/dashboard')
+        } else{
+            setLoading(false);
+        }
+    },[notification,props.history]);
 
     return (
         <>
@@ -31,7 +55,7 @@ const AuthForm = (props) => {
                 {
                     loading ? <Loader/>
                         :
-                        <form className="mt-3">
+                        <form className="mt-3" onSubmit={formik.handleSubmit}>
                             <div className="form-group">
                                 <TextField
                                     style={{ width: '100%'}}
@@ -39,6 +63,7 @@ const AuthForm = (props) => {
                                     label="Enter your email"
                                     variant="outlined"
                                     {...formik.getFieldProps('email')}
+                                    {...errorHelper(formik, 'email')}
                                 />
                             </div>
                                 <div className="form-group mt-3">
@@ -49,6 +74,7 @@ const AuthForm = (props) => {
                                         label="Enter your password"
                                         variant="outlined"
                                         {...formik.getFieldProps('password')}
+                                        {...errorHelper(formik, 'password')}
                                     />
                                 </div>
                                 <Button
