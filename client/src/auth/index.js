@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Button} from "@material-ui/core";
+import AuthForm from "./authForm";
 
-
-const RegisterLogin = () =>{
+const RegisterLogin = (props) =>{
     const [formType, setFormType ] = useState(false)
 
     const toggleFormType = () =>{
@@ -42,6 +42,10 @@ const RegisterLogin = () =>{
                     </div>
                     <div className="right">
                         <h2>{ formType ? 'Register': 'Sign in'}</h2>
+                        <AuthForm
+                            formType={formType}
+                            { ...props }
+                        />
                     </div>
                 </div>
             </div>
