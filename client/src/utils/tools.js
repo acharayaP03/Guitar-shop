@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import AddShoppingCartOutlined from "@material-ui/icons/AddShoppingCartOutlined";
 import {CircularProgress} from "@material-ui/core";
 import { toast } from 'react-toastify';
-
+import cookie from "react-cookies";
 export const WavesButton = ( props ) =>{
     let template = '';
 
@@ -86,3 +86,18 @@ export const errorHelper = (formik, value) =>({
     error: formik.errors[value] && formik.touched[value] ? true : false,
     helperText: formik.errors[value] && formik.touched[value] ? formik.errors[value] : null
 })
+
+
+/**
+ * for user auto sign in
+ */
+export const getTokenCookie = () => cookie.load('x-access-token');
+export const removeTokenCookie = () => cookie.remove('x-access-token', { path: '/'});
+
+export const getAuthHeader = () => {
+    return {
+        headers : {
+            'Authorization': `Bearer ${getTokenCookie()}`
+        }
+    }
+}
