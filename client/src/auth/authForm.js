@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import { useFormik} from "formik";
 import * as Yup from 'yup';
 import {Loader, errorHelper } from "../utils/tools";
-
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector} from "react-redux";
 import { TextField, Button} from "@material-ui/core";
 import  { userRegister , userSignIn } from 'store/actions/user.action'
@@ -11,6 +11,7 @@ const AuthForm = (props) => {
     const notification = useSelector(state=> state.notification);
     const [loading, setLoading] = useState(false)
     const  dispatch = useDispatch()
+    const navigation = useNavigate()
     /**
      * use formik to validate our form.
      */
@@ -43,11 +44,11 @@ const AuthForm = (props) => {
      */
     useEffect(()=>{
         if(notification && notification.success){
-            props.history.push('/dashboard')
+            navigation('/dashboard', { replace: true})
         } else{
             setLoading(false);
         }
-    },[notification,props.history]);
+    },[notification, props]);
 
     return (
         <>
