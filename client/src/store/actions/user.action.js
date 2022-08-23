@@ -50,9 +50,12 @@ export const userSignIn = (values) => {
 export const userIsAuthenticated = () => {
     return async (dispatch)=>{
         try {
-
+            if(!getTokenCookie()){
+                throw new Error();
+            }
+            console.log('its working')
         }catch (error){
-
+            //dispatch(actions.authenticateUser({ data:{}, auth: false}))
         }
     }
 }
