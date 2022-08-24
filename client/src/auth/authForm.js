@@ -44,7 +44,7 @@ const AuthForm = (props) => {
      */
     useEffect(()=>{
         if(notification && notification.success){
-            navigation('/', { replace: true})
+            navigation('/dashboard', { replace: true})
         } else{
             setLoading(false);
         }
