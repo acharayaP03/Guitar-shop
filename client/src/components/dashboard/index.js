@@ -7,7 +7,7 @@ const UserDashboard = () => {
 
 
     return (
-        <DashboardLayouts>
+        <DashboardLayouts title="Overview">
             Users Dashboard
         </DashboardLayouts>
     )
