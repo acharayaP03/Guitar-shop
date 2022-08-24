@@ -7,27 +7,40 @@ import Home from "./components/home";
 import Footer from "./components/navigation/footer";
 import {Loader} from "./utils/tools";
 import { useDispatch, useSelector } from "react-redux";
-import { authenticateUser } from "./store/actions";
+import { userIsAuthenticated } from "store/actions/user.action";
 
 function App(props){
     const [loading, setLoading] = useState(true);
-    //const users = useSelector(state => state.users);
+    const users = useSelector(state => state.users);
     const dispatch = useDispatch()
 
 
     useEffect(() =>{
-        dispatch(authenticateUser())
-    }, [dispatch])
+        dispatch(userIsAuthenticated())
+    }, [dispatch]);
+
+    useEffect(() =>{
+        if(users.auth !== null){
+            setLoading(false)
+        }
+    },[users])
   return (
         <BrowserRouter>
-            <Header />
-            <MainLayouts>
-                <Routes>
-                    <Route path="/sign_in" element={ <RegisterLogin />} />
-                    <Route path="/" element={ <Home /> }/>
-                </Routes>
-            </MainLayouts>
-            <Footer/>
+            {
+                loading ?
+                    <Loader full={true} />
+                    :
+                    <>
+                        <Header />
+                        <MainLayouts>
+                            <Routes>
+                                <Route path="/sign_in" element={ <RegisterLogin />} />
+                                <Route path="/" element={ <Home /> }/>
+                            </Routes>
+                        </MainLayouts>
+                        <Footer/>
+                    </>
+            }
         </BrowserRouter>
   );
 }

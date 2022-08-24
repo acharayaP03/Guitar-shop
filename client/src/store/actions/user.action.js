@@ -53,9 +53,11 @@ export const userIsAuthenticated = () => {
             if(!getTokenCookie()){
                 throw new Error();
             }
-            console.log('its working')
+
+            const user = await axios.get('/api/auth/isauthenticated', getAuthHeader());
+            dispatch(actions.authenticateUser({ data: user.data, auth: true}))
         }catch (error){
-            //dispatch(actions.authenticateUser({ data:{}, auth: false}))
+            dispatch(actions.authenticateUser({ data:{}, auth: false}))
         }
     }
 }
