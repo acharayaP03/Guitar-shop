@@ -7,16 +7,16 @@ import Home from "./components/home";
 import Footer from "./components/navigation/footer";
 import {Loader} from "./utils/tools";
 import { useDispatch, useSelector } from "react-redux";
-import { authenticateUser } from "./store/actions";
+import { userIsAuthenticated } from "store/actions/user.action";
 
 function App(props){
     const [loading, setLoading] = useState(true);
-    //const users = useSelector(state => state.users);
+    const users = useSelector(state => state.users);
     const dispatch = useDispatch()
 
 
     useEffect(() =>{
-        dispatch(authenticateUser())
+        dispatch(userIsAuthenticated())
     }, [dispatch])
   return (
         <BrowserRouter>

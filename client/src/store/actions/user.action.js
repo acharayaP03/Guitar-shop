@@ -55,7 +55,7 @@ export const userIsAuthenticated = () => {
             }
             console.log('its working')
         }catch (error){
-            //dispatch(actions.authenticateUser({ data:{}, auth: false}))
+            dispatch(actions.authenticateUser({ data:{}, auth: false}))
         }
     }
 }
