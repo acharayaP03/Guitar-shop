@@ -7,14 +7,16 @@ import Home from "./components/home";
 import Footer from "./components/navigation/footer";
 import {Loader} from "./utils/tools";
 import { useDispatch, useSelector } from "react-redux";
-import { userIsAuthenticated } from "store/actions/user.action";
+import {userIsAuthenticated, userSignOut} from "store/actions/user.action";
 
 function App(props){
     const [loading, setLoading] = useState(true);
     const users = useSelector(state => state.users);
     const dispatch = useDispatch()
 
-
+    const signOutUser = () =>{
+        dispatch(userSignOut())
+    }
     useEffect(() =>{
         dispatch(userIsAuthenticated())
     }, [dispatch]);
@@ -31,7 +33,10 @@ function App(props){
                     <Loader full={true} />
                     :
                     <>
-                        <Header />
+                        <Header
+                            users={users}
+                            signOutUsers={signOutUser}
+                        />
                         <MainLayouts>
                             <Routes>
                                 <Route path="/sign_in" element={ <RegisterLogin />} />

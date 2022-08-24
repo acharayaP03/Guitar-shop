@@ -1,6 +1,7 @@
 import * as actions from './index';
 import axios from "axios";
 import { getTokenCookie, removeTokenCookie, getAuthHeader } from "../../utils/tools";
+import {SIGN_OUT} from "../types";
 
 /**
  *
@@ -59,5 +60,15 @@ export const userIsAuthenticated = () => {
         }catch (error){
             dispatch(actions.authenticateUser({ data:{}, auth: false}))
         }
+    }
+}
+
+export const userSignOut = () => {
+    return async (dispatch) =>{
+        console.log('hehre')
+        removeTokenCookie();
+        dispatch(actions.userSignOut());
+        dispatch(actions.successGlobal('Thanks for visiting Guitar shop.'))
+
     }
 }
