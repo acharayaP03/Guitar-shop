@@ -4,6 +4,7 @@ import {Loader} from "./utils/tools";
 import { useDispatch, useSelector } from "react-redux";
 import {userIsAuthenticated, userSignOut} from "store/actions/user.action";
 
+import AuthGuard from 'hoc/auth.guard'
 import Header from "components/navigation/header";
 import MainLayouts from "./hoc/main.layouts";
 import RegisterLogin from "./auth";
@@ -44,7 +45,7 @@ function App(props){
                         />
                         <MainLayouts>
                             <Routes>
-                                <Route path="/dashboard" element={<UserDashboard />} />
+                                <Route path="/dashboard" element={AuthGuard(UserDashboard)} />
                                 <Route path="/sign_in" element={ <RegisterLogin />} />
                                 <Route path="/" element={ <Home /> }/>
                             </Routes>
