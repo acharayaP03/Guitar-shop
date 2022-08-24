@@ -17,17 +17,30 @@ function App(props){
 
     useEffect(() =>{
         dispatch(userIsAuthenticated())
-    }, [dispatch])
+    }, [dispatch]);
+
+    useEffect(() =>{
+        if(users.auth !== null){
+            setLoading(false)
+        }
+    },[users])
   return (
         <BrowserRouter>
-            <Header />
-            <MainLayouts>
-                <Routes>
-                    <Route path="/sign_in" element={ <RegisterLogin />} />
-                    <Route path="/" element={ <Home /> }/>
-                </Routes>
-            </MainLayouts>
-            <Footer/>
+            {
+                loading ?
+                    <Loader full={true} />
+                    :
+                    <>
+                        <Header />
+                        <MainLayouts>
+                            <Routes>
+                                <Route path="/sign_in" element={ <RegisterLogin />} />
+                                <Route path="/" element={ <Home /> }/>
+                            </Routes>
+                        </MainLayouts>
+                        <Footer/>
+                    </>
+            }
         </BrowserRouter>
   );
 }
