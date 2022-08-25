@@ -6,7 +6,8 @@ import {
     SUCCESS_GLOBAL,
     CLEAR_NOTIFICATION,
     AUTH_USER,
-    SIGN_OUT
+    SIGN_OUT,
+    UPDATE_USER_PROFILE
 } from '../types';
 
 
@@ -21,6 +22,11 @@ export const authenticateUser = (user) =>({
 
 export const userSignOut = () => ({
     type:SIGN_OUT
+})
+
+export const updateUserProfile = (userData) =>({
+    type: UPDATE_USER_PROFILE,
+    payload: userData
 })
 
 
