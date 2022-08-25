@@ -2,7 +2,7 @@ import React,{ useState, useEffect} from 'react';
 import { useSelector } from 'react-redux'
 import {Loader} from 'utils/tools';
 import { useNavigate} from "react-router-dom";
-import {replace} from "formik";
+
 
 /**
  *
@@ -19,7 +19,7 @@ export default function authGuard(ComposedComponent){
 
         useEffect(()=>{
             if(!users.auth){
-                navigation('/', { replace: true})
+                navigation('/', { replace: false})
             }else{
                 setIsAuth(true);
             }
@@ -35,10 +35,6 @@ export default function authGuard(ComposedComponent){
                 <ComposedComponent users={users} {...props}/>
             )
         }
-
-
-
-
     }
     return AuthenticationCheck;
 }
