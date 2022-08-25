@@ -13,7 +13,7 @@ import Footer from "./components/navigation/footer";
 
 
 import UserDashboard from 'components/dashboard'
-
+import UserInfo from "components/dashboard/user/info";
 
 function App(props){
     const [loading, setLoading] = useState(true);
@@ -26,6 +26,7 @@ function App(props){
      * below is the only way to prevent for warning happening and component not loading at all
      */
     const Dashboard = AuthGuard(UserDashboard)
+    const Info = AuthGuard(UserInfo)
 
     const signOutUser = () =>{
         dispatch(userSignOut())
@@ -54,6 +55,7 @@ function App(props){
                         />
                         <MainLayouts>
                             <Routes>
+                                <Route path="/dashboard" element={<Info />} />
                                 <Route path="/dashboard" element={<Dashboard />} />
                                 <Route path="/sign_in" element={ <RegisterLogin />} />
                                 <Route path="/" element={ <Home /> }/>
