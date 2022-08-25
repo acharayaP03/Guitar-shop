@@ -4,7 +4,7 @@ import {Loader} from "./utils/tools";
 import { useDispatch, useSelector } from "react-redux";
 import {userIsAuthenticated, userSignOut} from "store/actions/user.action";
 
-import AuthGuard from 'hoc/auth.guard'
+import AuthGuard from 'hoc/auth.guard' // returns component
 import Header from "components/navigation/header";
 import MainLayouts from "./hoc/main.layouts";
 import RegisterLogin from "./auth";
@@ -20,6 +20,13 @@ function App(props){
     const users = useSelector(state => state.users);
     const dispatch = useDispatch()
 
+    /**
+     * Since AuthGuard returns composed component,
+     * Route element attrs has to receive compponnet.
+     * below is the only way to prevent for warning happening and component not loading at all
+     */
+    const Dashboard = AuthGuard(UserDashboard)
+
     const signOutUser = () =>{
         dispatch(userSignOut())
     }
@@ -31,7 +38,9 @@ function App(props){
         if(users.auth !== null){
             setLoading(false)
         }
-    },[users])
+    },[users]);
+
+
   return (
         <BrowserRouter>
             {
@@ -45,7 +54,7 @@ function App(props){
                         />
                         <MainLayouts>
                             <Routes>
-                                <Route path="/dashboard" element={AuthGuard(UserDashboard)} />
+                                <Route path="/dashboard" element={<Dashboard />} />
                                 <Route path="/sign_in" element={ <RegisterLogin />} />
                                 <Route path="/" element={ <Home /> }/>
                             </Routes>
