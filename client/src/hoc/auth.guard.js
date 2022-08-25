@@ -1,7 +1,7 @@
 import React,{ useState, useEffect} from 'react';
 import { useSelector } from 'react-redux'
 import {Loader} from 'utils/tools';
-import { useNavigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 
 
 /**
@@ -11,8 +11,10 @@ import { useNavigate} from "react-router-dom";
  * checks if the user is logged in to access the dashboard.
  */
 
-export default function authGuard(ComposedComponent){
+export const AuthGuard = (ComposedComponent) =>{
+
     const AuthenticationCheck = (props) => {
+
         const [isAuth,setIsAuth] = useState(false);
         const users  = useSelector( state => state.users );
         const navigation = useNavigate()
@@ -37,4 +39,22 @@ export default function authGuard(ComposedComponent){
         }
     }
     return AuthenticationCheck;
+}
+
+/**
+ * prevent user to enter sign in page when they are already authenticated
+ */
+
+export const PreventSignInRoute = (props) =>{
+    const users  = useSelector( state => state.users );
+    return (
+        <>
+            {
+                users.auth ?
+                    <Navigate to="/dashboard" replace={true} />
+                    :
+                    props.children
+            }
+        </>
+    )
 }
