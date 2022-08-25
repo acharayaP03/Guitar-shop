@@ -4,7 +4,7 @@ import {Loader} from "./utils/tools";
 import { useDispatch, useSelector } from "react-redux";
 import {userIsAuthenticated, userSignOut} from "store/actions/user.action";
 
-import AuthGuard from 'hoc/auth.guard' // returns component
+import {AuthGuard} from 'hoc/auth.guard' // returns component
 import Header from "components/navigation/header";
 import MainLayouts from "./hoc/main.layouts";
 import RegisterLogin from "./auth";

@@ -3,7 +3,7 @@ import Card from './card';
 
 
 const CardContainer = ({ items, title, shop, grid }) =>{
-    console.log('from Card container: ',  items)
+
     const renderCards = () =>(
         items ?
             items.map( (item) =>(

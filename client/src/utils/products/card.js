@@ -3,8 +3,6 @@ import { renderCardImage , WavesButton} from '../tools';
 
 const Card = (props)=> {
 
-    console.log(props)
-
     const handleAddToCart = (item) =>{
         alert('Add to cart')
     }
