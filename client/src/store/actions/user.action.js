@@ -65,10 +65,32 @@ export const userIsAuthenticated = () => {
 
 export const userSignOut = () => {
     return async (dispatch) =>{
-        console.log('hehre')
         removeTokenCookie();
         dispatch(actions.userSignOut());
         dispatch(actions.successGlobal('Thanks for visiting Guitar shop.'))
 
+    }
+}
+
+export const updateUserProfile = (record) =>{
+    return async (dispatch, getState) =>{
+        try{
+            // 1.) get the profile for the user
+            const profile = await axios.patch(`/api/users/profile`, {
+                record
+            }, getAuthHeader());
+
+            // 2.) send data to the server
+            const userData ={
+                ...getState().users.data,
+                firstname: profile.data.firstname,
+                lastname: profile.data.lastname
+            }
+            console.log(userData)
+            dispatch(actions.updateUserProfile(userData));
+            dispatch(actions.successGlobal('Profile has been updated...'))
+        }catch (error){
+            dispatch(actions.errorGlobal(error.response.data.message))
+        }
     }
 }
