@@ -94,3 +94,19 @@ export const updateUserProfile = (record) =>{
         }
     }
 }
+
+export const changeUserEmail = (data) =>{
+    return async (dispatch) =>{
+        try{
+            await axios.patch(`/api/users/email`, {
+                email: data.email,
+                newemail: data.newemail
+            }, getAuthHeader());
+
+            dispatch(actions.changeUserEmail(data.newemail));
+            dispatch(actions.successGlobal('Your email has been changed, remember to verify your email.'))
+        }catch (error){
+            dispatch(actions.errorGlobal(error.response.data.message));
+        }
+    }
+}

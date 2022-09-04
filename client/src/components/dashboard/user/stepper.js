@@ -9,6 +9,7 @@ import {Modal} from 'react-bootstrap';
 
 import { TextField, Button, Stepper, StepLabel, Step} from "@material-ui/core";
 import usersReducer from "store/reducers/users.reducer";
+import {changeUserEmail} from "store/actions/user.action";
 
 
 const EmailStepper = ({ users }) =>{
@@ -36,7 +37,8 @@ const EmailStepper = ({ users }) =>{
                 })
         }),
         onSubmit: (values) =>{
-            console.log(values)
+            setLoading(true);
+            dispatch(changeUserEmail(values))
         }
     });
     const steps = ['Enter previous email', 'Enter new email', 'Please confirm new email']
@@ -64,6 +66,14 @@ const EmailStepper = ({ users }) =>{
         </Button>
     )
 
+
+    useEffect(()=>{
+        if( notification && notification.success){
+            closeModal();
+        }
+        setLoading(false);
+    },[notification])
+
     return (
         <>
             <form className="mt-3 article_form" style={{maxWidth:'250px'}}>
@@ -75,7 +85,6 @@ const EmailStepper = ({ users }) =>{
                         value={users.data.email}
                         disabled
                     />
-
                 </div>
                 <Button
                     className="mb-3 mt-3"
