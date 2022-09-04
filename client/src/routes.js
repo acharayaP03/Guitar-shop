@@ -55,7 +55,7 @@ function App(props){
                         />
                         <MainLayouts>
                             <Routes>
-                                <Route path="/dashboard" element={<Info />} />
+                                <Route path="/dashboard/user/user_info" element={<Info />} />
                                 <Route path="/dashboard" element={<Dashboard />} />
                                 <Route path="/sign_in" element={ <RegisterLogin />} />
                                 <Route path="/" element={ <Home /> }/>
