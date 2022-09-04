@@ -7,6 +7,8 @@ import { errorHelper} from "utils/tools";
 import { useDispatch} from "react-redux";
 import { TextField, Button } from "@material-ui/core";
 import { updateUserProfile } from "store/actions/user.action";
+import EmailStepper from "./stepper";
+
 
 const UserInfo = ({ users }) =>{
     const dispatch = useDispatch();
@@ -66,6 +68,10 @@ const UserInfo = ({ users }) =>{
                     Edit profile
                 </Button>
             </form>
+            <hr/>
+            <div>
+                <EmailStepper users={users}/>
+            </div>
         </DashboardLayouts>
     )
 }

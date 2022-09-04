@@ -23,4 +23,4 @@ export const CLEAR_NOTIFICATION = 'clear_notification';
 export const AUTH_USER = 'auth_user';
 export const SIGN_OUT ='sign_out';
 export const UPDATE_USER_PROFILE = 'update_user_profile';
-
+export const CHANGE_USER_EMAIL = 'change_user_email';
