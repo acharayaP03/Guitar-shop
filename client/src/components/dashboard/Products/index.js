@@ -3,6 +3,7 @@ import { useDispatch, useSelector} from "react-redux";
 
 import DashboardLayouts from "hoc/dashboard.layouts";
 import {getProductByPaginate} from "../../../store/actions/products.action";
+import ProductTable from "./productTable";
 
 const defaultValues = {
     keywords: '',
@@ -30,8 +31,14 @@ const AdminProducts = (props) => {
     },[dispatch, searchValues])
 
     return(
-        <DashboardLayouts>
-            return something here...
+        <DashboardLayouts title="Products">
+           <div className="products_table">
+               <div>
+                   Search bar
+               </div>
+               <hr/>
+               <ProductTable products={products.byPaginate}/>
+           </div>
         </DashboardLayouts>
     )
 }
