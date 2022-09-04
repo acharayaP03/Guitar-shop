@@ -7,7 +7,7 @@ import {
     CLEAR_NOTIFICATION,
     AUTH_USER,
     SIGN_OUT,
-    UPDATE_USER_PROFILE, CHANGE_USER_EMAIL
+    UPDATE_USER_PROFILE, CHANGE_USER_EMAIL, GET_PRODUCT_BY_PAGINATE
 } from '../types';
 
 
@@ -46,6 +46,11 @@ export const productsBySold = (data) => ({
 export const productsByDate = (data) => ({
     type: GET_PRODUCTS_BY_DATE,
     payload: data
+});
+
+export const getProductsByPaginate = (products) =>({
+    type: GET_PRODUCT_BY_PAGINATE,
+    payload: products
 })
 
 /// NOTIFICATIONS

@@ -170,6 +170,8 @@ const paginateProduct = async( req ) => {
             }
         )
 
+
+        console.log(aggQueryArray)
         let aggQuery = Product.aggregate(aggQueryArray);
         const options = {
             page: 1,

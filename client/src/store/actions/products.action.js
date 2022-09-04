@@ -2,6 +2,7 @@ import axios from "axios";
 import * as actions from './index'
 
 
+
 export const productsBySort = ({ limit, sortBy, order, where}) =>{
     return async (dispatch) =>{
         try{
@@ -24,6 +25,18 @@ export const productsBySort = ({ limit, sortBy, order, where}) =>{
                 default:
                     return false;
             }
+        }catch (error){
+            dispatch(actions.errorGlobal(error.response.data.message))
+        }
+    }
+}
+
+
+export const getProductByPaginate = (args) => {
+    return async (dispatch) =>{
+        try{
+            const product = await axios.post(`/api/products/paginate/all`)
+            dispatch(actions.getProductsByPaginate(product.data))
         }catch (error){
             dispatch(actions.errorGlobal(error.response.data.message))
         }

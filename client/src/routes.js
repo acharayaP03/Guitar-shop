@@ -14,6 +14,7 @@ import Footer from "./components/navigation/footer";
 
 import UserDashboard from 'components/dashboard'
 import UserInfo from "components/dashboard/user/info";
+import AdminProducts from "components/dashboard/Products";
 
 function App(props){
     const [loading, setLoading] = useState(true);
@@ -55,6 +56,7 @@ function App(props){
                         />
                         <MainLayouts>
                             <Routes>
+                                <Route path="/dashboard/admin/admin_products" element={<AdminProducts />} />
                                 <Route path="/dashboard/user/user_info" element={<Info />} />
                                 <Route path="/dashboard" element={<Dashboard />} />
                                 <Route path="/sign_in" element={ <RegisterLogin />} />
