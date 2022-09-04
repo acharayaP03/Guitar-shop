@@ -5,7 +5,14 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Moment from "react-moment";
 import { Loader} from "utils/tools";
 
-const ProductTable = ({ products }) =>{
+const ProductTable = ({ products, prev, next, gotoEdit }) =>{
+    const goToPrevPage = (page) => {
+        prev(page)
+    }
+
+    const goToNextPage = (page) => {
+        next(page)
+    }
 
     return(
         <>
@@ -35,7 +42,7 @@ const ProductTable = ({ products }) =>{
                                     Remove
                                 </td>
                                 <td className="action_btn edit_btn"
-                                    onClick={()=>alert('edit')}
+                                    onClick={()=>gotoEdit(item._id)}
                                 >
                                     Edit
                                 </td>
@@ -47,8 +54,8 @@ const ProductTable = ({ products }) =>{
                     <Pagination>
                         { products.hasPrevPage ?
                             <>
-                                <Pagination.Prev onClick={()=>alert('prev')}/>
-                                <Pagination.Item onClick={()=>alert('go to prev')}>
+                                <Pagination.Prev onClick={()=> goToPrevPage(products.prevPage)}/>
+                                <Pagination.Item onClick={()=>goToPrevPage(products.prevPage)}>
                                     {products.prevPage}
                                 </Pagination.Item>
                             </>
@@ -57,13 +64,17 @@ const ProductTable = ({ products }) =>{
                         { products.hasNextPage ?
                             <>
 
-                                <Pagination.Item onClick={()=>alert('go to next')}>
+                                <Pagination.Item onClick={()=>goToNextPage(products.nextPage)}>
                                     {products.nextPage}
                                 </Pagination.Item>
-                                <Pagination.Next onClick={()=>alert('next')}/>
+                                <Pagination.Next onClick={()=>goToNextPage(products.nextPage)}/>
                             </>
                             :null}
                     </Pagination>
+                    <hr/>
+                    <LinkContainer to="/dashboard/admin/add_products">
+                        <Button variant="secondary">Add product</Button>
+                    </LinkContainer>
                 </>
                 :
                 <Loader/>
