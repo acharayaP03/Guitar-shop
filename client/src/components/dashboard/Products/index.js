@@ -5,7 +5,6 @@ import DashboardLayouts from "hoc/dashboard.layouts";
 import {getProductByPaginate} from "../../../store/actions/products.action";
 import ProductTable from "./productTable";
 import {useNavigate} from "react-router-dom";
-import {replace} from "formik";
 
 const defaultValues = {
     keywords: '',
@@ -17,6 +16,9 @@ const defaultValues = {
 }
 
 const AdminProducts = (props) => {
+
+    const [removeModal, setRemoveModal] = useState(false);
+    const [toRemove, setToRemove] = useState(null);
 
     const products = useSelector(state => state.products);
     const notifications = useSelector(state => state.notification);
@@ -36,9 +38,33 @@ const AdminProducts = (props) => {
         setSearchValues({ page });
     }
 
+    const handleClose = () => {
+        setRemoveModal(false);
+    }
+
+    // removes the element form dom
+    const handleModal = (id) =>{
+        setToRemove(id);
+        setRemoveModal(true);
+    }
+
+    const handleRemove = () =>{
+        dispatch(removeProduct(toRemove));
+    }
+
+
+
     useEffect(() =>{
         dispatch((getProductByPaginate(searchValues)))
-    },[dispatch, searchValues])
+    },[dispatch, searchValues]);
+
+    useEffect(() => {
+        handleClose();
+        setRemoveModal(null);
+        if(notifications && notifications.remove_product){
+            dispatch(getProductByPaginate(searchValues))
+        }
+    }, [dispatch, notifications]);
 
     return(
         <DashboardLayouts title="Products">
@@ -52,6 +78,10 @@ const AdminProducts = (props) => {
                    prev={(page)=> gotoPage(page)}
                    next={(page)=> gotoPage(page)}
                    gotoEdit={(id)=> gotoEdit(id)}
+                   removeModal={removeModal}
+                   handleClose={()=> handleClose()}
+                   handleModal={(id)=> handleModal(id)}
+                   handleRemove={()=> handleRemove()}
                />
            </div>
         </DashboardLayouts>

@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as actions from './index'
+import {getAuthHeader} from "../../utils/tools";
 
 
 
@@ -38,6 +39,18 @@ export const getProductByPaginate = (args) => {
             const product = await axios.post(`/api/products/paginate/all`)
             dispatch(actions.getProductsByPaginate(product.data))
         }catch (error){
+            dispatch(actions.errorGlobal(error.response.data.message))
+        }
+    }
+}
+
+export const removeProduct = (id) => {
+    return async(dispatch) =>{
+        try{
+          await axios.delete(`/api/products/product/${id}`, getAuthHeader());
+          dispatch(actions.removeProduct());
+          dispatch(actions.successGlobal())
+        }catch(error){
             dispatch(actions.errorGlobal(error.response.data.message))
         }
     }
