@@ -5,6 +5,7 @@
 export const GET_PRODUCTS_BY_SOLD = 'get_product_by_sold';
 export const GET_PRODUCTS_BY_DATE = 'get_product_by_date';
 export const GET_PRODUCT_BY_PAGINATE = 'get_product_by_paginate';
+export const REMOVE_PRODUCT = 'remove_product'
 
 /**
  * Notifications types

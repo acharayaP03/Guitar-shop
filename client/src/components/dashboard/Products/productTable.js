@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Moment from "react-moment";
 import { Loader} from "utils/tools";
 
-const ProductTable = ({ products, prev, next, gotoEdit }) =>{
+const ProductTable = ({ products, prev, next, gotoEdit, removeModal, handleClose, handleModal, handleRemove }) =>{
     const goToPrevPage = (page) => {
         prev(page)
     }
@@ -37,7 +37,7 @@ const ProductTable = ({ products, prev, next, gotoEdit }) =>{
                                 <td>{item.model}</td>
                                 <td>{item.available}</td>
                                 <td className="action_btn remove_btn"
-                                    onClick={()=>alert('REMOVE')}
+                                    onClick={()=> handleModal(item._id)}
                                 >
                                     Remove
                                 </td>
@@ -79,6 +79,18 @@ const ProductTable = ({ products, prev, next, gotoEdit }) =>{
                 :
                 <Loader/>
             }
+            <Modal show={removeModal} onHide={handleClose}>
+                <Modal.Header>Are you sure?</Modal.Header>
+                <Modal.Body>There is no going back.</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Opps, close this now!!
+                    </Button>
+                    <Button variant="danger" onClick={() => handleRemove}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     )
 }

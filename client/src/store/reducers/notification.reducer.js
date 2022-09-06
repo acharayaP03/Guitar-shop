@@ -1,8 +1,8 @@
 import {
     ERROR_GLOBAL,
     SUCCESS_GLOBAL,
-    CLEAR_NOTIFICATION
-
+    CLEAR_NOTIFICATION,
+    REMOVE_PRODUCT
 } from '../types';
 
 export default function notificationsReducer(state={},action){
@@ -14,6 +14,8 @@ export default function notificationsReducer(state={},action){
         case CLEAR_NOTIFICATION:
             // clear all notification state if no error or once the error is shown.
             return {}
+        case REMOVE_PRODUCT:
+            return{ ...state, remove_product: true}
         default:
             return state
     }
