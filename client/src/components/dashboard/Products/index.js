@@ -5,6 +5,7 @@ import DashboardLayouts from "hoc/dashboard.layouts";
 import {getProductByPaginate} from "../../../store/actions/products.action";
 import ProductTable from "./productTable";
 import {useNavigate} from "react-router-dom";
+import { removeProduct } from "../../../store/actions/products.action";
 
 const defaultValues = {
     keywords: '',
