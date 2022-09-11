@@ -13,7 +13,7 @@ import {addProduct} from "../../../store/actions/products.action";
 
 const AddProduct = (props) => {
     const [loading, setLoading] = useState(false);
-    const notifications =  useSelector(state=>state.notifications);
+    const notifications =  useSelector(state=>state.notification);
     const brands = useSelector(state=>state.brands);
     const dispatch = useDispatch();
     const navigation = useNavigate();
@@ -42,6 +42,7 @@ const AddProduct = (props) => {
 
     useEffect(()=>{
         if(notifications && notifications.success){
+            setLoading(false)
             navigation('/dashboard/admin/admin_products', { replace: true});
         }
         if(notifications && notifications.error){
