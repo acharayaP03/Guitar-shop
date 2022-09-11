@@ -59,8 +59,8 @@ export const removeProduct = (id) => {
 export const addProduct = (product) => {
     return async(dispatch) =>{
         try{
-            await axios.post(`/api/brands/brand`, product, getAuthHeader());
-            dispatch(actions.addProduct(product));
+            const newProduct = await axios.post(`/api/products`, product, getAuthHeader());
+            dispatch(actions.addProduct(newProduct.data));
             dispatch(actions.successGlobal())
         }catch(error){
             dispatch(actions.errorGlobal(error.response.data.message))
