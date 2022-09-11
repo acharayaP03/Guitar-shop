@@ -55,3 +55,15 @@ export const removeProduct = (id) => {
         }
     }
 }
+
+export const addProduct = (product) => {
+    return async(dispatch) =>{
+        try{
+            await axios.post(`/api/brands/brand`, product, getAuthHeader());
+            dispatch(actions.addProduct(product));
+            dispatch(actions.successGlobal())
+        }catch(error){
+            dispatch(actions.errorGlobal(error.response.data.message))
+        }
+    }
+}
