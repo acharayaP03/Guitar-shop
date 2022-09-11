@@ -11,6 +11,7 @@ const ProductTable = ({ products, prev, next, gotoEdit, removeModal, handleClose
     }
 
     const goToNextPage = (page) => {
+        console.log(page)
         next(page)
     }
 
