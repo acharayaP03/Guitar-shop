@@ -86,7 +86,7 @@ const ProductTable = ({ products, prev, next, gotoEdit, removeModal, handleClose
                     <Button variant="secondary" onClick={handleClose}>
                         Opps, close this now!!
                     </Button>
-                    <Button variant="danger" onClick={() => handleRemove}>
+                    <Button variant="danger" onClick={() => handleRemove()}>
                         Delete
                     </Button>
                 </Modal.Footer>
