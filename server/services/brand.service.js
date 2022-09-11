@@ -45,7 +45,7 @@ const getBrands = async (args) =>{
     try {
         //if user passes empty args by chance
         let order = args.order ? args.order : "asc";
-        let limit = args.limit ? args.limit : 5;
+        let limit = args.limit ? args.limit : 10;
 
         const brands = await Brand
             .find({})

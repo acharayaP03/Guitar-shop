@@ -3,11 +3,12 @@ import DashbordLayouts from "hoc/dashboard.layouts";
 import { useFormik } from "formik";
 import { validation } from "./formvalues";
 import { errorHelper, Loader} from "utils/tools";
-
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector} from "react-redux";
 import { getAllBrands } from 'store/actions/brands.actions';
 
 import { TextField, Button, Divider, Select, MenuItem, FormControl, FormHelperText } from "@material-ui/core";
+import {addProduct} from "../../../store/actions/products.action";
 
 
 const AddProduct = (props) => {
@@ -15,7 +16,7 @@ const AddProduct = (props) => {
     const notifications =  useSelector(state=>state.notifications);
     const brands = useSelector(state=>state.brands);
     const dispatch = useDispatch();
-
+    const navigation = useNavigate();
 
     const formik = useFormik({
         initialValues:{
@@ -30,9 +31,23 @@ const AddProduct = (props) => {
         },
         validationSchema: validation,
         onSubmit:(values)=>{
-            console.log(values)
+            handleSubmit(values)
         }
     });
+
+    const handleSubmit = (data) => {
+        setLoading(true);
+        dispatch(addProduct(data))
+    }
+
+    useEffect(()=>{
+        if(notifications && notifications.success){
+            navigation('/dashboard/admin/admin_products', { replace: true});
+        }
+        if(notifications && notifications.error){
+            setLoading(false)
+        }
+    },[notifications, navigation])
 
     useEffect(()=>{
         dispatch(getAllBrands());
