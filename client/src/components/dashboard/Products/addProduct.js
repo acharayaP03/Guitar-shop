@@ -5,12 +5,18 @@ import { validation } from "./formvalues";
 import { errorHelper, Loader} from "utils/tools";
 
 import { useDispatch, useSelector} from "react-redux";
+import { getAllBrands } from 'store/actions/brands.actions';
 
 import { TextField, Button, Divider, Select, MenuItem, FormControl, FormHelperText } from "@material-ui/core";
 
 
 const AddProduct = (props) => {
     const [loading, setLoading] = useState(false);
+    const notifications =  useSelector(state=>state.notifications);
+    const brands = useSelector(state=>state.brands);
+    const dispatch = useDispatch();
+
+
     const formik = useFormik({
         initialValues:{
             model:'',
@@ -27,6 +33,10 @@ const AddProduct = (props) => {
             console.log(values)
         }
     });
+
+    useEffect(()=>{
+        dispatch(getAllBrands());
+    },[dispatch])
 
     return (
         <DashbordLayouts title="Add Product">
@@ -81,13 +91,13 @@ const AddProduct = (props) => {
                                         <MenuItem value="">
                                             <em>None</em>
                                         </MenuItem>
-                                        {/*{ brands && brands.all ?*/}
-                                        {/*    brands.all.map((item)=>(*/}
-                                        {/*        <MenuItem key={item._id} value={item._id}>*/}
-                                        {/*            {item.name}*/}
-                                        {/*        </MenuItem>*/}
-                                        {/*    ))*/}
-                                        {/*    :null}*/}
+                                        { brands && brands.all ?
+                                            brands.all.map((item)=>(
+                                                <MenuItem key={item._id} value={item._id}>
+                                                    {item.name}
+                                                </MenuItem>
+                                            ))
+                                            :null}
                                     </Select>
                                     {formik.errors.brand && formik.touched.brand ?
                                         <FormHelperText error={true}>
@@ -106,7 +116,7 @@ const AddProduct = (props) => {
                                     {...formik.getFieldProps('description')}
                                     {...errorHelper(formik,'description')}
                                     multiline
-                                    rows="4"
+                                    minRows="4"
                                 />
                             </div>
 
@@ -148,7 +158,7 @@ const AddProduct = (props) => {
                                         error={formik.errors.shipping && formik.touched.shipping ? true:false}
                                     >
                                         <MenuItem value={true}> Yes </MenuItem>
-                                        <MenuItem value={false}> Nop </MenuItem>
+                                        <MenuItem value={false}> No </MenuItem>
                                     </Select>
                                     {formik.errors.shipping && formik.touched.shipping ?
                                         <FormHelperText error={true}>
