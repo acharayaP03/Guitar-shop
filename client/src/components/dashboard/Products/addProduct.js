@@ -1,5 +1,6 @@
 import React, { useEffect, useState} from "react";
 import DashbordLayouts from "hoc/dashboard.layouts";
+import UploadImage from "./uploadImage";
 import { useFormik } from "formik";
 import { validation } from "./formvalues";
 import { errorHelper, Loader} from "utils/tools";
@@ -61,6 +62,9 @@ const AddProduct = (props) => {
                     <Loader/>
                     :
                     <>
+                        <UploadImage/>
+                        <Divider className="mt-3 mb-3"/>
+
                         <form className="mt-3 article_form" onSubmit={formik.handleSubmit}>
                             <div className="form-group">
                                 <TextField
