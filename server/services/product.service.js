@@ -2,7 +2,9 @@ const {Product} = require("../models/product");
 const httpStatus = require("http-status");
 const { ApiError } = require('../middleware/apiError')
 const mongoose = require('mongoose');
-const cloudinary = require("cloudinary");
+const {flatten} = require("express/lib/utils");
+const cloudinary = require("cloudinary").v2;
+
 
 cloudinary.config({
     cloud_name: `${process.env.CLOUDINARY_CLOUD_NAME}`,
@@ -194,13 +196,15 @@ const paginateProduct = async( req ) => {
 }
 
 const imageUploader = async (req) => {
-
     try{
-
-        const upload = await cloudinary.uploader.upload(req.files.file.path, {
+        const upload = await cloudinary.uploader.upload(req.files.file.filepath, {
+            use_filename: true,
+            unique_filename: false,
+            overwrite: true,
             public_id: `${Date.now()}`,
             folder: 'guitar-shop'
         });
+
 
         return {
             public_id: upload.public_id,
