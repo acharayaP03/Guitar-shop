@@ -1,3 +1,5 @@
+
+const formidable = require('formidable')
 const { productService } = require('../services');
 
 const productController = {
@@ -67,6 +69,16 @@ const productController = {
             next(error)
         }
     },
+    async imageUploader(req, res, next){
+        try{
+            const form = formidable({ multiple: true})
+            console.log(form)
+            const image = await productService.imageUploader(req);
+            res.json(image);
+        }catch (error){
+            next(error)
+        }
+    }
 };
 
 module.exports = productController

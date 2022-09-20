@@ -21,6 +21,6 @@ router.get('/all', productController.getAllProducts)
 router.post('/paginate/all', productController.paginateProduct)
 
 // image upload
-router.post('/upload', auth('createAny', 'product'), formidable());
+router.post('/upload', auth('createAny', 'product'), productController.imageUploader);
 
 module.exports = router;
