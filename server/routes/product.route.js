@@ -4,7 +4,7 @@ const router = express.Router();
 const productController = require('../controllers/product.controller');
 const auth = require('../middleware/auth');
 const { addProductValidator } = require('../middleware/validations');
-
+const formidable = require('formidable');
 
 router.post('/', auth('createAny', 'product'), addProductValidator, productController.addProduct)
 /**
@@ -19,5 +19,8 @@ router.route('/product/:id')
 
 router.get('/all', productController.getAllProducts)
 router.post('/paginate/all', productController.paginateProduct)
+
+// image upload
+router.post('/upload', auth('createAny', 'product'), formidable());
 
 module.exports = router;
