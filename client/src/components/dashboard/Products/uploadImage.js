@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { Form, Button} from "react-bootstrap";
+import {Form, Button, Row, Figure} from "react-bootstrap";
 
 import { useFormik} from "formik";
 import * as Yup from 'yup';
 import axios from 'axios';
 import { getTokenCookie } from "utils/tools";
-import {Loader} from "utils/tools";
+import {Loader, renderCardImage } from "utils/tools";
 
 
-const UploadImage = () => {
+const UploadImage = (props) => {
     const [loading, setLoading] = useState(false);
 
     const formik = useFormik({
@@ -44,13 +44,21 @@ const UploadImage = () => {
                     <Loader/>
                     :
                     <Form onSubmit={formik.handleSubmit}>
-                        <Form.Group>
-                            <Form.Control
+                        <Form.Group as={Row}>
+
+                            <Figure.Image
+                                width={171}
+                                height={180}
+                                alt="171x180"
+                                src={renderCardImage(props)}
                                 id="file"
                                 name="file"
-                                type="file"
-                                onChange={(event)=>{
-                                    formik.setFieldValue("image", event.target.files[0])
+                                onClick={(event)=>{
+                                    console.log(event)
+                                    //formik.setFieldValue("image", event.target.files[0])
+                                }}
+                                style={{
+                                    width: '20%'
                                 }}
                             />
                             { formik.errors.image && formik.touched.image ?
