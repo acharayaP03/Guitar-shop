@@ -46,19 +46,26 @@ const UploadImage = (props) => {
                     <Form onSubmit={formik.handleSubmit}>
                         <Form.Group as={Row}>
 
-                            <Figure.Image
-                                width={171}
-                                height={180}
-                                alt="171x180"
-                                src={renderCardImage(props)}
+                            {/*<Figure.Image*/}
+                            {/*    width={171}*/}
+                            {/*    height={180}*/}
+                            {/*    alt="171x180"*/}
+                            {/*    src={renderCardImage(props)}*/}
+                            {/*    onChange={(event)=>{*/}
+                            {/*        console.log(event)*/}
+                            {/*        //formik.setFieldValue("image", event.target.files[0])*/}
+                            {/*    }}*/}
+                            {/*    style={{*/}
+                            {/*        width: '20%'*/}
+                            {/*    }}*/}
+                            {/*/>*/}
+                            <Form.Control
                                 id="file"
                                 name="file"
-                                onClick={(event)=>{
+                                type="file"
+                                onChange={(event)=>{
                                     console.log(event)
-                                    //formik.setFieldValue("image", event.target.files[0])
-                                }}
-                                style={{
-                                    width: '20%'
+                                    formik.setFieldValue("image", event.target.files[0])
                                 }}
                             />
                             { formik.errors.image && formik.touched.image ?
