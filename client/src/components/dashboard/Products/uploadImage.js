@@ -12,14 +12,14 @@ const UploadImage = (props) => {
     const [loading, setLoading] = useState(false);
 
     const formik = useFormik({
-        initialValues: { image: ''},
+        initialValues: { images: ''},
         validationSchema: Yup.object({
-            image: Yup.mixed().required('Please upload image.')
+            images: Yup.mixed().required('Please upload image.')
         }),
         onSubmit: (values) =>{
             setLoading(true);
             let formData = new FormData();
-            formData.append('file', values.image);
+            formData.append('file', values.images);
 
             axios.post(`/api/products/upload`, formData, {
                 headers: {
@@ -27,9 +27,9 @@ const UploadImage = (props) => {
                     'Authorization': `Bearer ${getTokenCookie()}`
                 }
             }).then( response =>{
-                console.log(response.data)
+                props.picValue(response.data)
             }).catch(error =>{
-                alert(error)
+                console.log(error);
             }).finally(() =>{
                 setLoading(false)
             })
@@ -45,30 +45,15 @@ const UploadImage = (props) => {
                     :
                     <Form onSubmit={formik.handleSubmit}>
                         <Form.Group as={Row}>
-
-                            {/*<Figure.Image*/}
-                            {/*    width={171}*/}
-                            {/*    height={180}*/}
-                            {/*    alt="171x180"*/}
-                            {/*    src={renderCardImage(props)}*/}
-                            {/*    onChange={(event)=>{*/}
-                            {/*        console.log(event)*/}
-                            {/*        //formik.setFieldValue("image", event.target.files[0])*/}
-                            {/*    }}*/}
-                            {/*    style={{*/}
-                            {/*        width: '20%'*/}
-                            {/*    }}*/}
-                            {/*/>*/}
                             <Form.Control
                                 id="file"
                                 name="file"
                                 type="file"
                                 onChange={(event)=>{
-                                    console.log(event)
-                                    formik.setFieldValue("image", event.target.files[0])
+                                    formik.setFieldValue("images", event.target.files[0])
                                 }}
                             />
-                            { formik.errors.image && formik.touched.image ?
+                            { formik.errors.images && formik.touched.images ?
                                 <div>Error</div>
                                 :null
                             }

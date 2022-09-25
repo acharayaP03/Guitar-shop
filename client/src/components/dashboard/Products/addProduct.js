@@ -10,6 +10,7 @@ import { getAllBrands } from 'store/actions/brands.actions';
 
 import { TextField, Button, Divider, Select, MenuItem, FormControl, FormHelperText } from "@material-ui/core";
 import {addProduct} from "../../../store/actions/products.action";
+import ImageViewer from "./imageViewer";
 
 
 const AddProduct = (props) => {
@@ -28,7 +29,8 @@ const AddProduct = (props) => {
             description:'',
             price:'',
             available:'',
-            shipping:false
+            shipping:false,
+            images:[]
         },
         validationSchema: validation,
         onSubmit:(values)=>{
@@ -39,6 +41,18 @@ const AddProduct = (props) => {
     const handleSubmit = (data) => {
         setLoading(true);
         dispatch(addProduct(data))
+    }
+
+    const deleteImage = (index) =>{
+        const imageArray = formik.values.images;
+        imageArray.splice(index, 1);
+        formik.setFieldValue('images', imageArray )
+    }
+
+    const handlePicValue = (pic) => {
+        const picArray = formik.values.images;
+        picArray.push(pic.url);
+        formik.setFieldValue('images',picArray)
     }
 
     useEffect(()=>{
@@ -62,7 +76,11 @@ const AddProduct = (props) => {
                     <Loader/>
                     :
                     <>
-                        <UploadImage/>
+                        <ImageViewer
+                            formik={formik}
+                            deleteImage={(index) => deleteImage(index)}
+                        />
+                        <UploadImage picValue={(pic)=> handlePicValue(pic)}/>
                         <Divider className="mt-3 mb-3"/>
 
                         <form className="mt-3 article_form" onSubmit={formik.handleSubmit}>

@@ -205,10 +205,9 @@ const imageUploader = async (req) => {
             folder: 'guitar-shop'
         });
 
-
         return {
             public_id: upload.public_id,
-            folder: upload.url
+            url: upload.url
         }
     }catch (error){
         throw error
