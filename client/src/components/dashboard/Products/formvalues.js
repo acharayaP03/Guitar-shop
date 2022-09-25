@@ -10,7 +10,8 @@ export const formValues = {
     description:'',
     price:'',
     available:'',
-    shipping:false
+    shipping:false,
+    images: []
 }
 
 export const validation = () => (
