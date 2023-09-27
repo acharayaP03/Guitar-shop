@@ -9,7 +9,7 @@ import {
     SIGN_OUT,
     UPDATE_USER_PROFILE, CHANGE_USER_EMAIL, GET_PRODUCT_BY_PAGINATE,
     REMOVE_PRODUCT,
-    GET_ALL_BRANDS, ADD_PRODUCT
+    GET_ALL_BRANDS, ADD_PRODUCT, GET_PRODUCT_BY_ID
 } from '../types';
 
 
@@ -66,6 +66,11 @@ export const getAllBrands = (brands) =>({
 
 export const addProduct = (product) =>({
     type: ADD_PRODUCT,
+    payload: product
+})
+
+export const productById = (product) =>({
+    type: GET_PRODUCT_BY_ID,
     payload: product
 })
 

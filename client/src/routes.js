@@ -16,7 +16,7 @@ import UserDashboard from 'components/dashboard'
 import UserInfo from "components/dashboard/user/info";
 import AdminProducts from "components/dashboard/Products";
 import AddProduct from "components/dashboard/Products/addProduct";
-
+import EditProduct from "components/dashboard/Products/editProduct";
 function App(props){
     const [loading, setLoading] = useState(true);
     const users = useSelector(state => state.users);
@@ -57,6 +57,7 @@ function App(props){
                         />
                         <MainLayouts>
                             <Routes>
+                                <Route path="/dashboard/admin/edit_product/:id" element={<EditProduct />} />
                                 <Route path="/dashboard/admin/add_products" element={<AddProduct />} />
                                 <Route path="/dashboard/admin/admin_products" element={<AdminProducts />} />
                                 <Route path="/dashboard/user/user_info" element={<Info />} />
