@@ -13,6 +13,7 @@ import { TextField, Button, Divider, Select, MenuItem, FormControl, FormHelperTe
 import { getAllBrands } from "store/actions/brands.actions";
 import {useNavigate, useParams} from "react-router-dom";
 import {productEdit, productsById} from "store/actions/products.action";
+import {clearCurrentProduct} from "store/actions";
 
 const EditProduct = (props) => {
     const [values, setValues ] = useState(formValues);
@@ -53,7 +54,6 @@ const EditProduct = (props) => {
     useEffect(()=>{
         if(notifications && notifications.success){
             setLoading(false)
-            navigation('/dashboard/admin/admin_products', { replace: true});
         }
         if(notifications && notifications.error){
             setLoading(false)
@@ -74,7 +74,11 @@ const EditProduct = (props) => {
         }
     },[dispatch, id])
 
-
+    useEffect(()=>{
+        return () =>{
+            dispatch(clearCurrentProduct())
+        }
+    }, [dispatch])
     return (
         <DashboardLayouts title="Add Product">
             {

@@ -9,7 +9,7 @@ import {
     SIGN_OUT,
     UPDATE_USER_PROFILE, CHANGE_USER_EMAIL, GET_PRODUCT_BY_PAGINATE,
     REMOVE_PRODUCT,
-    GET_ALL_BRANDS, ADD_PRODUCT, GET_PRODUCT_BY_ID
+    GET_ALL_BRANDS, ADD_PRODUCT, GET_PRODUCT_BY_ID, CLEAR_CURRENT_PRODUCT
 } from '../types';
 
 
@@ -93,3 +93,8 @@ export const clearNotification = () => {
         })
     }
 }
+
+export const clearCurrentProduct = () => ({
+    type: CLEAR_CURRENT_PRODUCT,
+    payload: {}
+})
