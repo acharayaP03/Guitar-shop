@@ -8,7 +8,9 @@ export const GET_PRODUCT_BY_PAGINATE = 'get_product_by_paginate';
 export const REMOVE_PRODUCT = 'remove_product';
 export const GET_ALL_BRANDS = 'get_all_brands'
 export const ADD_PRODUCT = 'add_product';
-export const CLEAR_PRODUCT_ADD = 'clear_product_add'
+export const CLEAR_PRODUCT_ADD = 'clear_product_add';
+export const GET_PRODUCT_BY_ID = 'get_prod_by_id';
+
 
 /**
  * Notifications types

@@ -14,6 +14,24 @@ export const formValues = {
     images: []
 }
 
+/**
+ * @getValuesToEdit will retrieve product to edit
+ */
+
+export const getValuesToEdit = (product) =>{
+    return {
+        model: product.model,
+        brand: product.brand,
+        frets: product.frets,
+        woodtype: product.woodtype,
+        description: product.description,
+        price: product.price,
+        available: product.available,
+        shipping: product.shipping,
+        images: product.images
+    }
+}
+
 export const validation = () => (
     Yup.object({
         model: Yup.string()

@@ -714,15 +714,16 @@ footer .business_nfo .nfo {
 }
 
 .slick-slide .img-block {
+background: url(http://res.cloudinary.com/dxxrvghna/image/upload/v1616397932/site_uploads/1616397929236.png) no-repeat;
+    width: 100%;
+    height: 100vh;
+    background-size: contain; 
     width: 100%;
     height: 100vh;
     background-size: cover !important;
 }
 
-/* background: url(http://res.cloudinary.com/dxxrvghna/image/upload/v1616397932/site_uploads/1616397929236.png) no-repeat;
-    width: 100%;
-    height: 100vh;
-    background-size: contain; */
+
 
 .product_detail_wrapper p {
     font-size: 17px;
