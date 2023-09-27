@@ -10,9 +10,9 @@ import {validation, formValues, getValuesToEdit} from "./formvalues";
 
 import { TextField, Button, Divider, Select, MenuItem, FormControl, FormHelperText } from "@material-ui/core";
 
-import { getAllBrands } from "store/actions";
+import { getAllBrands } from "store/actions/brands.actions";
 import {useNavigate, useParams} from "react-router-dom";
-import {addProduct, productsById} from "store/actions/products.action";
+import {productEdit, productsById} from "store/actions/products.action";
 
 const EditProduct = (props) => {
     const [values, setValues ] = useState(formValues);
@@ -33,9 +33,9 @@ const EditProduct = (props) => {
         }
     });
 
-    const handleSubmit = (data) => {
+    const handleSubmit = (values) => {
         setLoading(true);
-        dispatch(addProduct(data))
+        dispatch(productEdit(values, id))
     }
 
     const deleteImage = (index) =>{
@@ -71,7 +71,6 @@ const EditProduct = (props) => {
         dispatch(getAllBrands());
         if(id){
             dispatch(productsById(id))
-            console.log('this is where i went wrong: ', products)
         }
     },[dispatch, id])
 
@@ -220,7 +219,7 @@ const EditProduct = (props) => {
                                 color="primary"
                                 type="submit"
                             >
-                                Add product
+                                Edit Product
                             </Button>
                         </form>
                     </>
