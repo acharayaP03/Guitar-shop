@@ -10,7 +10,7 @@ export const GET_ALL_BRANDS = 'get_all_brands'
 export const ADD_PRODUCT = 'add_product';
 export const CLEAR_PRODUCT_ADD = 'clear_product_add';
 export const GET_PRODUCT_BY_ID = 'get_prod_by_id';
-
+export const CLEAR_CURRENT_PRODUCT = 'clear_current_product';
 
 /**
  * Notifications types
