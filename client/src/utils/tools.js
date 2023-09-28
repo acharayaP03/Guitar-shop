@@ -1,51 +1,57 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
-import AddShoppingCartOutlined from "@material-ui/icons/AddShoppingCartOutlined";
-import {CircularProgress} from "@material-ui/core";
+import { Link } from 'react-router-dom';
+import AddShoppingCartOutlined from '@material-ui/icons/AddShoppingCartOutlined';
+import { CircularProgress } from '@material-ui/core';
 import { toast } from 'react-toastify';
-import cookie from "react-cookies";
-export const WavesButton = ( props ) =>{
+import cookie from 'react-cookies';
+export const WavesButton = (props) => {
     let template = '';
 
-    switch (props.type){
+    switch (props.type) {
         case 'default':
-            template = <Link to={props.linkTo}
-                             className={
-                                !props.altClass ? 'link_default': props.altClass
-                             }
-                             style={{
-                                 ...props.style
-                             }}
-            >
-                { props.title }
-            </Link>
+            template = (
+                <Link
+                    to={props.linkTo}
+                    className={
+                        !props.altClass ? 'link_default' : props.altClass
+                    }
+                    style={{
+                        ...props.style,
+                    }}
+                >
+                    {props.title}
+                </Link>
+            );
             break;
         case 'bag_link':
-            template = <div
-                className="bag_link"
-                onClick={() => {
-                        props.runAction()
-                    }
-                }
-                style={{ ...props.style }}
-            >
-                <AddShoppingCartOutlined style={{ fontSize: props.iconSize }} />
-            </div>
+            template = (
+                <div
+                    className="bag_link"
+                    onClick={() => {
+                        props.runAction();
+                    }}
+                    style={{ ...props.style }}
+                >
+                    <AddShoppingCartOutlined
+                        style={{ fontSize: props.iconSize }}
+                    />
+                </div>
+            );
             break;
         default:
-            template='';
+            template = '';
     }
 
     return template;
-}
+};
 
 export const renderCardImage = (image) => {
-    if(image.length > 0){
-        return image[0]
-    }else{
-        return '/images/img.png'
+    if (image.length > 0) {
+        return image[0];
+    } else {
+        return '/images/img.png';
     }
-}
+};
 /**
  * Loader when request is sent..
  * @param full
@@ -53,7 +59,7 @@ export const renderCardImage = (image) => {
  * @constructor
  */
 export const Loader = ({ full }) => (
-    <div className={`root_loader ${full ? 'full': ''}`}>
+    <div className={`root_loader ${full ? 'full' : ''}`}>
         <CircularProgress />
     </div>
 );
@@ -65,39 +71,41 @@ export const Loader = ({ full }) => (
  * @returns {boolean}
  */
 export const showToast = (type, msg) => {
-
-    switch(type){
+    switch (type) {
         case 'SUCCESS':
-            toast.success(msg,{
-                position:toast.POSITION.BOTTOM_RIGHT
-            })
+            toast.success(msg, {
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
             break;
         case 'ERROR':
-            toast.error(msg,{
-                position:toast.POSITION.BOTTOM_RIGHT
-            })
+            toast.error(msg, {
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
             break;
         default:
-            return false
+            return false;
     }
-}
+};
 
-export const errorHelper = (formik, value) =>({
+export const errorHelper = (formik, value) => ({
     error: formik.errors[value] && formik.touched[value] ? true : false,
-    helperText: formik.errors[value] && formik.touched[value] ? formik.errors[value] : null
-})
-
+    helperText:
+        formik.errors[value] && formik.touched[value]
+            ? formik.errors[value]
+            : null,
+});
 
 /**
  * for user auto sign in
  */
 export const getTokenCookie = () => cookie.load('x-access-token');
-export const removeTokenCookie = () => cookie.remove('x-access-token', { path: '/'});
+export const removeTokenCookie = () =>
+    cookie.remove('x-access-token', { path: '/' });
 
 export const getAuthHeader = () => {
     return {
-        headers : {
-            'Authorization': `Bearer ${getTokenCookie()}`
-        }
-    }
-}
+        headers: {
+            Authorization: `Bearer ${getTokenCookie()}`,
+        },
+    };
+};

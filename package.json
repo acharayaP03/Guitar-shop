@@ -38,5 +38,8 @@
     "passport-jwt": "^4.0.0",
     "validator": "^13.7.0",
     "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }

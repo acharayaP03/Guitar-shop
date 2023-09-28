@@ -1,17 +1,16 @@
 import React from 'react';
-import { renderCardImage , WavesButton} from '../tools';
+import { renderCardImage, WavesButton } from '../tools';
 
-const Card = (props)=> {
-
-    const handleAddToCart = (item) =>{
-        alert('Add to cart')
-    }
-    return(
-        <div className={`card_item_wrapper ${props.grid ? 'grid_bars':''}`}>
+const Card = (props) => {
+    const handleAddToCart = (item) => {
+        alert('Add to cart');
+    };
+    return (
+        <div className={`card_item_wrapper ${props.grid ? 'grid_bars' : ''}`}>
             <div
                 className="image"
                 style={{
-                    background:`url(${renderCardImage(props.item.images)})`
+                    background: `url(${renderCardImage(props.item.images)})`,
                 }}
             ></div>
             <div className="action_container">
@@ -21,15 +20,11 @@ const Card = (props)=> {
                     <div className="name">${props.item.price}</div>
                 </div>
 
-                {
-                    props.grid ?
+                {props.grid ? (
                     <div className="description">
-                        <p>
-                            {props.item.description}
-                        </p>
+                        <p>{props.item.description}</p>
                     </div>
-                    :null
-                }
+                ) : null}
                 <div className="actions">
                     <div className="button_wrapp">
                         <WavesButton
@@ -38,22 +33,21 @@ const Card = (props)=> {
                             title="View Product"
                             linkTo={`/product_detail/${props.item._id}`}
                             style={{
-                                fontWeight:'bold'
+                                fontWeight: 'bold',
                             }}
-                            />
+                        />
                     </div>
                     <div className="button_wrapp">
                         <WavesButton
                             type="bag_link"
-                            runAction={ () => handleAddToCart(props.item) }
+                            runAction={() => handleAddToCart(props.item)}
                             iconSize="23"
-                            />
+                        />
                     </div>
                 </div>
             </div>
         </div>
-    )
-
-}
+    );
+};
 
 export default Card;
