@@ -1,6 +1,6 @@
 body {
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
     font-family: 'Roboto', sans-serif;
     color: #404040;
 }
@@ -18,10 +18,9 @@ a:hover {
 .root_loader.full {
     margin: 50vh;
 }
-  
 
 .container {
-    width:1100px;
+    width: 1100px;
     margin: 0 auto;
 }
 .page_container {
@@ -38,7 +37,7 @@ a:hover {
 
 a {
     text-decoration: none;
-    color:inherit;
+    color: inherit;
 }
 
 .bck_b_light {
@@ -63,7 +62,7 @@ a {
 
 .load_more_container span {
     cursor: pointer;
-    background: #2196F3;
+    background: #2196f3;
     color: #ffffff;
     font-size: 27px;
     padding: 10px 60px;
@@ -97,7 +96,8 @@ table {
     width: 100%;
 }
 
-td, th {
+td,
+th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
@@ -108,7 +108,7 @@ tr:nth-child(even) {
 }
 
 .MuiFormControl-root {
-    width: 100%;  
+    width: 100%;
 }
 
 /*============================
@@ -119,7 +119,7 @@ tr:nth-child(even) {
     width: 200px;
     height: 200px;
     background-size: cover !important;
-    display:inline-block
+    display: inline-block;
 }
 
 input {
@@ -142,8 +142,8 @@ button {
 }
 
 .error_label {
-    color: #F44336;
-    display:block;
+    color: #f44336;
+    display: block;
     font-size: 15px;
 }
 
@@ -182,49 +182,48 @@ select {
 }
 
 .form_block_two {
-    display:flex;
+    display: flex;
 }
-.form_block_two .block{
+.form_block_two .block {
     flex-grow: 1;
     box-sizing: border-box;
 }
 
 .form_block_two .block:nth-child(1) {
-    padding-right:10px;
+    padding-right: 10px;
 }
 .form_block_two .block:nth-child(2) {
-    padding-left:10px;
+    padding-left: 10px;
 }
 
 .form_success {
-    background: #4CAF50;
+    background: #4caf50;
     color: #ffffffff;
     padding: 10px;
     display: block;
 }
 
-.products_table .action_btn{
+.products_table .action_btn {
     width: 100px;
     text-align: center;
     font-weight: 400;
     color: #fff;
     cursor: pointer;
-  }
-  
-  .products_table .remove_btn {
+}
+
+.products_table .remove_btn {
     background: #dc3545;
-  }
-  .products_table .remove_btn:hover {
+}
+.products_table .remove_btn:hover {
     background: #ee7782;
-  }
-  
-  .products_table .edit_btn{ 
+}
+
+.products_table .edit_btn {
     background: #117a8b;
-  }
-  .products_table .edit_btn:hover{ 
+}
+.products_table .edit_btn:hover {
     background: #3d99a8;
-  }
-  
+}
 
 /*============================
             BUTTONS
@@ -286,17 +285,15 @@ select {
     margin-top: 10px;
 }
 
-
 /*============================
         PAGE TOP
 ==============================*/
 
 .page_top {
-    border-bottom: 1px solid #999592;   
+    border-bottom: 1px solid #999592;
     padding: 20px 0px;
     text-transform: uppercase;
 }
-
 
 /*============================
             HEADER
@@ -323,27 +320,27 @@ header .container {
     display: flex;
 }
 
-header .container .left{
+header .container .left {
     width: 250px;
 }
 
-header .container .right{
-   flex-grow: 1;
-   border-left: 1px solid #eeeeee;
-   border-right: 1px solid #eeeeee;
+header .container .right {
+    flex-grow: 1;
+    border-left: 1px solid #eeeeee;
+    border-right: 1px solid #eeeeee;
 }
-header .container .right .top ,
+header .container .right .top,
 header .container .right .bottom {
     text-transform: uppercase;
-    font-weight: 700; 
+    font-weight: 700;
     text-align: right;
-    color:#ffffff;
+    color: #ffffff;
     font-size: 15px;
     padding: 10px 20px;
 }
 
 header .container .right .top {
-    color:#c9c9c9;
+    color: #c9c9c9;
     border-bottom: 1px solid #ffffff;
 }
 
@@ -368,12 +365,9 @@ header .log_out_link {
     margin-left: 20px;
 }
 
-
 /*============================
             FOOTER
 ==============================*/
-
-
 
 footer .logo {
     text-align: center;
@@ -410,19 +404,17 @@ footer .business_nfo .tag {
 footer .business_nfo .MuiSvgIcon-root {
     position: absolute;
     font-size: 26px;
-    top: 10px; 
+    top: 10px;
 }
 
 footer .business_nfo .nfo {
     padding-left: 40px;
 }
 
-
-
 /*============================
         FEATURED IMAGE
 ==============================*/
-.featured_container{
+.featured_container {
     display: block;
     width: 100%;
 }
@@ -430,7 +422,7 @@ footer .business_nfo .nfo {
     display: block;
     width: 100vw;
     height: calc(100vh - 250px);
-    position:relative;
+    position: relative;
     background-size: cover !important;
     background-position: center center !important;
 }
@@ -472,7 +464,6 @@ footer .business_nfo .nfo {
     box-sizing: border-box;
 }
 
-
 .slim_promotion .tag {
     background: #82828287;
     color: #ffffff;
@@ -498,10 +489,9 @@ footer .business_nfo .nfo {
     margin: 10px auto;
 }
 
-.slim_promotion .btn{
+.slim_promotion .btn {
     margin-top: 20px;
 }
-
 
 /*============================
         CARD BLOCK
@@ -525,7 +515,6 @@ footer .business_nfo .nfo {
     margin-bottom: 10px;
     border-bottom: 1px solid #e8e8e8;
 }
-
 
 .page-item.active .page-link {
     background-color: #272723;
@@ -557,7 +546,6 @@ footer .business_nfo .nfo {
     border: 1px solid #f0f0f0;
 }
 
-
 .card_item_wrapper .tags {
     position: relative;
     border-bottom: 1px solid #f0f0f0;
@@ -573,7 +561,7 @@ footer .business_nfo .nfo {
 .card_item_wrapper .tags .brand {
     font-size: 17px;
     font-weight: 700;
-    color: #2196F3;
+    color: #2196f3;
 }
 
 .card_item_wrapper .tags .name {
@@ -606,7 +594,6 @@ footer .business_nfo .nfo {
     width: 420px;
     height: 211px;
     border: none;
-
 }
 
 .card_item_wrapper.grid_bars .action_container {
@@ -614,13 +601,13 @@ footer .business_nfo .nfo {
     border: 1px solid #e6e6e6;
 }
 
-.card_item_wrapper.grid_bars .description{
-    clear:both;
+.card_item_wrapper.grid_bars .description {
+    clear: both;
     padding: 0px 25px;
     border-top: 1px solid #eeeeee;
 }
 
-.card_item_wrapper.grid_bars .tags{
+.card_item_wrapper.grid_bars .tags {
     border-bottom: 0px;
     padding: 5px 20px;
 }
@@ -629,19 +616,18 @@ footer .business_nfo .nfo {
     font-size: 21px;
 }
 
-
 .card_item_wrapper.grid_bars .tags .brand,
 .card_item_wrapper.grid_bars .tags .name {
-    float:left
+    float: left;
 }
 
 .card_item_wrapper.grid_bars .tags .price {
-    float:right;
+    float: right;
 }
 
 .card_item_wrapper.grid_bars .actions {
-    clear:both;
-    float:right;
+    clear: both;
+    float: right;
     padding: 10px 20px 0px 15px;
 }
 
@@ -650,7 +636,7 @@ footer .business_nfo .nfo {
 ==============================*/
 
 .shop_wrapper {
-    display:flex;
+    display: flex;
 }
 
 .shop_wrapper .left {
@@ -662,11 +648,11 @@ footer .business_nfo .nfo {
 }
 
 .collapse_items_wrapper .MuiList-root {
-    borderBottom: '1px solid #dbdbdb'
+    border-bottom: '1px solid #dbdbdb';
 }
 
 .collapse_items_wrapper .MuiListItem-root {
-    padding: '10px 23px 10px 0' 
+    padding: '10px 23px 10px 0';
 }
 
 .collapse_items_wrapper .collapse_title span {
@@ -688,42 +674,39 @@ footer .business_nfo .nfo {
     margin: 0px 20px 20px 20px;
 }
 
-
 /*============================
         PRODUCT DETAIL
 ==============================*/
 
 .product_detail_wrapper {
-    display: flex;   
+    display: flex;
     margin-bottom: 140px;
     margin-top: 60px;
 }
 
-.product_detail_wrapper .right{
-    flex-grow: 1; 
+.product_detail_wrapper .right {
+    flex-grow: 1;
     min-height: 800px;
 }
 
-.product_detail_wrapper .left div{
+.product_detail_wrapper .left div {
     padding-right: 20px;
-
 }
 
-.product_detail_wrapper .left div img{
+.product_detail_wrapper .left div img {
     width: 400px;
 }
 
 .slick-slide .img-block {
-background: url(http://res.cloudinary.com/dxxrvghna/image/upload/v1616397932/site_uploads/1616397929236.png) no-repeat;
+    background: url(http://res.cloudinary.com/dxxrvghna/image/upload/v1616397932/site_uploads/1616397929236.png)
+        no-repeat;
     width: 100%;
     height: 100vh;
-    background-size: contain; 
+    background-size: contain;
     width: 100%;
     height: 100vh;
     background-size: cover !important;
 }
-
-
 
 .product_detail_wrapper p {
     font-size: 17px;
@@ -755,7 +738,7 @@ background: url(http://res.cloudinary.com/dxxrvghna/image/upload/v1616397932/sit
     width: 160px;
 }
 
-.product_detail_wrapper .product_actions .price{
+.product_detail_wrapper .product_actions .price {
     font-size: 40px;
     font-weight: 300;
 }
@@ -770,7 +753,7 @@ background: url(http://res.cloudinary.com/dxxrvghna/image/upload/v1616397932/sit
     padding: 20px 30px;
 }
 
-.cart_no_items svg ,
+.cart_no_items svg,
 .cart_success svg {
     font-size: 130px;
     color: #717171;
@@ -782,13 +765,12 @@ background: url(http://res.cloudinary.com/dxxrvghna/image/upload/v1616397932/sit
     color: #999592;
 }
 
-
 .product_detail_wrapper .product_actions {
     padding: 20px 0px 30px 0px;
     border-bottom: 1px solid #d3d3d3;
 }
 
-.product_detail_wrapper .product_specifications .item{
+.product_detail_wrapper .product_specifications .item {
     font-size: 15px;
     text-transform: uppercase;
     color: #838383;
@@ -813,11 +795,8 @@ background: url(http://res.cloudinary.com/dxxrvghna/image/upload/v1616397932/sit
 }
 
 .product_detail_wrapper .main_thumbs {
-
     margin-top: 10px;
 }
-
-
 
 .product_detail_wrapper .main_thumbs .thumb {
     cursor: pointer;
@@ -830,7 +809,7 @@ background: url(http://res.cloudinary.com/dxxrvghna/image/upload/v1616397932/sit
     float: left;
 }
 
-.paypal_button_container{
+.paypal_button_container {
     margin: 10px 0px;
 }
 
@@ -851,7 +830,7 @@ background: url(http://res.cloudinary.com/dxxrvghna/image/upload/v1616397932/sit
 
 .register_login_container .left,
 .register_login_container .right {
-    flex:1
+    flex: 1;
 }
 
 .register_login_container h2 {
@@ -860,7 +839,7 @@ background: url(http://res.cloudinary.com/dxxrvghna/image/upload/v1616397932/sit
     color: #686868;
 }
 
-.register_login_container p{
+.register_login_container p {
     font-weight: 300;
     font-size: 16px;
     width: 90%;
@@ -871,17 +850,17 @@ background: url(http://res.cloudinary.com/dxxrvghna/image/upload/v1616397932/sit
 ===============================*/
 
 .user_container {
-    display:flex;
+    display: flex;
     margin-bottom: 50px;
     min-height: 700px;
 }
 
-.user_container .dashboard_title{
+.user_container .dashboard_title {
     margin-top: 20px;
 }
 
 .user_container .user_left_nav {
-    border-right: 1px solid #f8f8f8; 
+    border-right: 1px solid #f8f8f8;
     margin-top: 30px;
 }
 
@@ -898,7 +877,7 @@ background: url(http://res.cloudinary.com/dxxrvghna/image/upload/v1616397932/sit
     width: 280px;
 }
 
-.user_container  .user_right {
+.user_container .user_right {
     flex-grow: 1;
     padding: 0 0 0 29px;
 }
@@ -916,13 +895,11 @@ background: url(http://res.cloudinary.com/dxxrvghna/image/upload/v1616397932/sit
     font-size: 25px;
 }
 
-
-.user_container .user_nfo_panel span{
+.user_container .user_nfo_panel span {
     display: block;
     font-size: 18px;
     font-weight: 300;
 }
-
 
 .user_product_block {
     display: flex;
@@ -937,7 +914,7 @@ background: url(http://res.cloudinary.com/dxxrvghna/image/upload/v1616397932/sit
     flex-grow: 1;
 }
 
-.user_product_block .item .image{
+.user_product_block .item .image {
     height: 125px;
     background-size: contain !important;
     background-repeat: no-repeat !important;
@@ -948,10 +925,9 @@ background: url(http://res.cloudinary.com/dxxrvghna/image/upload/v1616397932/sit
     width: 0px;
 }
 
-
 .user_product_block .cart_remove_btn {
     cursor: pointer;
-    background: #F44336;
+    background: #f44336;
     display: inline-block;
     padding: 5px 10px;
     color: #ffffff;
@@ -1004,7 +980,7 @@ background: url(http://res.cloudinary.com/dxxrvghna/image/upload/v1616397932/sit
     box-sizing: border-box;
 }
 
-.dropzone_box  .wrap {
+.dropzone_box .wrap {
     background: #eaeaea;
     height: 100%;
     text-align: center;
@@ -1018,7 +994,7 @@ background: url(http://res.cloudinary.com/dxxrvghna/image/upload/v1616397932/sit
 
 .modal-90w {
     width: 90%;
-    max-width: none!important;
+    max-width: none !important;
 }
 
 .modal-90w .modal-content {
@@ -1030,9 +1006,9 @@ background: url(http://res.cloudinary.com/dxxrvghna/image/upload/v1616397932/sit
 }
 
 .modal-90w img {
-    margin:0 auto;
+    margin: 0 auto;
 }
 
 .pp_button {
-    margin-top:10px
+    margin-top: 10px;
 }

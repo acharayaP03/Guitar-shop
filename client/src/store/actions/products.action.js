@@ -1,18 +1,16 @@
-import axios from "axios";
-import * as actions from './index'
-import {getAuthHeader} from "../../utils/tools";
+import axios from 'axios';
+import * as actions from './index';
+import { getAuthHeader } from '../../utils/tools';
 
-
-
-export const productsBySort = ({ limit, sortBy, order, where}) =>{
-    return async (dispatch) =>{
-        try{
-            const product = await axios.get('/api/products/all',{
-                params:{
+export const productsBySort = ({ limit, sortBy, order, where }) => {
+    return async (dispatch) => {
+        try {
+            const product = await axios.get('/api/products/all', {
+                params: {
                     limit,
                     sortBy,
-                    order
-                }
+                    order,
+                },
             });
             //
             // console.log(product)
@@ -26,70 +24,80 @@ export const productsBySort = ({ limit, sortBy, order, where}) =>{
                 default:
                     return false;
             }
-        }catch (error){
-            dispatch(actions.errorGlobal(error.response.data.message))
+        } catch (error) {
+            dispatch(actions.errorGlobal(error.response.data.message));
         }
-    }
-}
-
+    };
+};
 
 export const getProductByPaginate = (args) => {
-    return async (dispatch) =>{
-        try{
-            const product = await axios.post(`/api/products/paginate/all`, args)
-            dispatch(actions.getProductsByPaginate(product.data))
-        }catch (error){
-            dispatch(actions.errorGlobal(error.response.data.message))
+    return async (dispatch) => {
+        try {
+            const product = await axios.post(
+                `/api/products/paginate/all`,
+                args
+            );
+            dispatch(actions.getProductsByPaginate(product.data));
+        } catch (error) {
+            dispatch(actions.errorGlobal(error.response.data.message));
         }
-    }
-}
+    };
+};
 
 export const removeProduct = (id) => {
-    return async(dispatch) =>{
-        try{
-          await axios.delete(`/api/products/product/${id}`, getAuthHeader());
-          dispatch(actions.removeProduct());
-          dispatch(actions.successGlobal())
-        }catch(error){
-            dispatch(actions.errorGlobal(error.response.data.message))
+    return async (dispatch) => {
+        try {
+            await axios.delete(`/api/products/product/${id}`, getAuthHeader());
+            dispatch(actions.removeProduct());
+            dispatch(actions.successGlobal());
+        } catch (error) {
+            dispatch(actions.errorGlobal(error.response.data.message));
         }
-    }
-}
+    };
+};
 
 export const addProduct = (product) => {
-    return async(dispatch) =>{
-        try{
-            const newProduct = await axios.post(`/api/products`, product, getAuthHeader());
+    return async (dispatch) => {
+        try {
+            const newProduct = await axios.post(
+                `/api/products`,
+                product,
+                getAuthHeader()
+            );
             dispatch(actions.addProduct(newProduct.data));
-            dispatch(actions.successGlobal())
-        }catch(error){
-            dispatch(actions.errorGlobal(error.response.data.message))
+            dispatch(actions.successGlobal());
+        } catch (error) {
+            dispatch(actions.errorGlobal(error.response.data.message));
         }
-    }
-}
+    };
+};
 
 /**
  * get product by id
  */
 
-export const productsById = (id) =>{
-    return async (dispatch) =>{
-        try{
+export const productsById = (id) => {
+    return async (dispatch) => {
+        try {
             const product = await axios.get(`/api/products/product/${id}`);
             dispatch(actions.productById(product.data));
-        } catch (error){
-            dispatch(actions.errorGlobal(error.response.data.message))
+        } catch (error) {
+            dispatch(actions.errorGlobal(error.response.data.message));
         }
-    }
-}
+    };
+};
 
 export const productEdit = (values, id) => {
     return async (dispatch) => {
-        try{
-            await axios.patch(`/api/products/product/${id}`, values, getAuthHeader());
+        try {
+            await axios.patch(
+                `/api/products/product/${id}`,
+                values,
+                getAuthHeader()
+            );
             dispatch(actions.successGlobal('Update done !!'));
-        }catch (error){
-            dispatch(actions.errorGlobal(error.response.data.message))
+        } catch (error) {
+            dispatch(actions.errorGlobal(error.response.data.message));
         }
-    }
-}
+    };
+};

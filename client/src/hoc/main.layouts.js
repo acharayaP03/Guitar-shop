@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { showToast} from "../utils/tools";
+import { showToast } from '../utils/tools';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearNotification } from 'store/actions/index';
 /**
@@ -12,32 +12,28 @@ import { clearNotification } from 'store/actions/index';
  * @constructor
  */
 const MainLayouts = (props) => {
-    const notifications = useSelector(state => state.notification);
-    const dispatch = useDispatch()
+    const notifications = useSelector((state) => state.notification);
+    const dispatch = useDispatch();
 
-
-    useEffect(()=>{
-        if(notifications && notifications.error){
+    useEffect(() => {
+        if (notifications && notifications.error) {
             const msg = notifications.msg ? notifications.msg : 'Error';
-            showToast('ERROR',msg);
+            showToast('ERROR', msg);
             dispatch(clearNotification());
         }
-        if(notifications && notifications.success){
+        if (notifications && notifications.success) {
             const msg = notifications.msg ? notifications.msg : 'Good job !!';
-            showToast('SUCCESS',msg);
+            showToast('SUCCESS', msg);
             dispatch(clearNotification());
         }
+    }, [notifications, dispatch]);
 
-    },[notifications,dispatch])
-
-
-    return(
+    return (
         <>
             {props.children}
-            <ToastContainer/>
+            <ToastContainer />
         </>
+    );
+};
 
-    )
-}
-
-export  default MainLayouts;
+export default MainLayouts;
