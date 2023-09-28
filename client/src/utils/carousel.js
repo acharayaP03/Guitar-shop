@@ -8,13 +8,15 @@ import "slick-carousel/slick/slick-theme.css";
 const Carrousel = ({items}) => {
 
     const settings = {
-        dot:true,
-        infinite:true,
-        speed:500,
-        slidesToShow:1,
-        slidesToScroll:1,
-        arrows:true
-    }
+    dots: false,
+    arrows: true,
+    infinite: true,
+    speed: 500,
+    autoplay:true,
+    autoplaySpeed: 3000,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  }
 
     const generateSlides = () => (
         items ?
@@ -46,8 +48,8 @@ const Carrousel = ({items}) => {
     );
 
     return(
-        <Slider {...settings}>
-            { generateSlides()}
+        <Slider { ...settings }>
+            { generateSlides() }
         </Slider>
     )
 

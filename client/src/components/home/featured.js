@@ -6,7 +6,7 @@ const Featured = () => {
 
     const corouselItems = [
         {
-            img:'/images/featured/unsplash.jpeg',
+            img:'/images/featured/featured_home.jpg',
             lineOne:'Fender',
             lineTwo:'Custom shop',
             linkTitle:'Show Now',

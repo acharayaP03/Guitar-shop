@@ -45,8 +45,11 @@
   "devDependencies": {
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
     "formik": "^2.2.9",
     "moment": "^2.29.4",
+    "prettier": "^3.0.3",
     "yup": "^0.32.11"
   },
   "proxy": "http://localhost:8080"
