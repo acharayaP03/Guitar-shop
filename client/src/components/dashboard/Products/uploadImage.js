@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { Form, Button, Row, Figure } from 'react-bootstrap';
+import React, { useState } from 'react'
+import { Form, Button, Row } from 'react-bootstrap'
 
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import axios from 'axios';
-import { getTokenCookie } from 'utils/tools';
-import { Loader, renderCardImage } from 'utils/tools';
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import axios from 'axios'
+import { getTokenCookie } from 'utils/tools'
+import { Loader } from 'utils/tools'
 
 const UploadImage = (props) => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false)
 
     const formik = useFormik({
         initialValues: { images: '' },
@@ -16,9 +16,9 @@ const UploadImage = (props) => {
             images: Yup.mixed().required('Please upload image.'),
         }),
         onSubmit: (values) => {
-            setLoading(true);
-            let formData = new FormData();
-            formData.append('file', values.images);
+            setLoading(true)
+            let formData = new FormData()
+            formData.append('file', values.images)
 
             axios
                 .post(`/api/products/upload`, formData, {
@@ -28,16 +28,16 @@ const UploadImage = (props) => {
                     },
                 })
                 .then((response) => {
-                    props.picValue(response.data);
+                    props.picValue(response.data)
                 })
                 .catch((error) => {
-                    console.log(error);
+                    console.log(error)
                 })
                 .finally(() => {
-                    setLoading(false);
-                });
+                    setLoading(false)
+                })
         },
-    });
+    })
 
     return (
         <>
@@ -54,7 +54,7 @@ const UploadImage = (props) => {
                                 formik.setFieldValue(
                                     'images',
                                     event.target.files[0]
-                                );
+                                )
                             }}
                         />
                         {formik.errors.images && formik.touched.images ? (
@@ -67,7 +67,7 @@ const UploadImage = (props) => {
                 </Form>
             )}
         </>
-    );
-};
+    )
+}
 
-export default UploadImage;
+export default UploadImage

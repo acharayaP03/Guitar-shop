@@ -178,13 +178,10 @@ const paginateProduct = async( req ) => {
                 $unwind: '$brand' // with out this $unwind, it will return object wrapped in array.
             }
         )
-
-
-        console.log(req.body)
         let aggQuery = Product.aggregate(aggQueryArray);
         const options = {
             page: req.body.page,
-            limit: 2,
+            limit: 10,
             sort: { date: 'desc'}
         }
 

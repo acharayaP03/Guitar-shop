@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useReducer } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect, useReducer } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import {
     getProductByPaginate,
     removeProduct,
-} from 'store/actions/products.action';
-import { useNavigate } from 'react-router-dom';
+} from 'store/actions/products.action'
+import { useNavigate } from 'react-router-dom'
 
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { errorHelper } from 'utils/tools';
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import { errorHelper } from 'utils/tools'
 
-import { TextField } from '@material-ui/core';
-import { Button } from 'react-bootstrap';
-import DashboardLayouts from 'hoc/dashboard.layouts';
-import ProductTable from './productTable';
+import { TextField } from '@material-ui/core'
+import { Button } from 'react-bootstrap'
+import DashboardLayouts from 'hoc/dashboard.layouts'
+import ProductTable from './productTable'
 
 const defaultValues = {
     keywords: '',
@@ -22,21 +22,21 @@ const defaultValues = {
     max: 5000,
     frets: [],
     page: 1,
-};
+}
 
-const AdminProducts = (props) => {
-    const [removeModal, setRemoveModal] = useState(false);
-    const [toRemove, setToRemove] = useState(null);
+const AdminProducts = () => {
+    const [removeModal, setRemoveModal] = useState(false)
+    const [toRemove, setToRemove] = useState(null)
 
-    const products = useSelector((state) => state.products);
-    const notifications = useSelector((state) => state.notification);
-    const navigation = useNavigate();
-    const dispatch = useDispatch();
+    const products = useSelector((state) => state.products)
+    const notifications = useSelector((state) => state.notification)
+    const navigation = useNavigate()
+    const dispatch = useDispatch()
 
     const [searchValues, setSearchValues] = useReducer(
         (state, newState) => ({ ...state, ...newState }),
         defaultValues
-    );
+    )
 
     const formik = useFormik({
         initialValues: { keywords: '' },
@@ -49,49 +49,49 @@ const AdminProducts = (props) => {
                 .max(200, 'Your search is too long.'),
         }),
         onSubmit: (values, { resetForm }) => {
-            setSearchValues({ keywords: values.keywords, page: 1 });
-            resetForm();
+            setSearchValues({ keywords: values.keywords, page: 1 })
+            resetForm()
         },
-    });
+    })
 
     const resetSearch = () => {
-        setSearchValues(defaultValues);
-    };
+        setSearchValues(defaultValues)
+    }
 
     const gotoEdit = (id) => {
-        navigation(`/dashboard/admin/edit_product/${id}`, { replace: true });
-    };
+        navigation(`/dashboard/admin/edit_product/${id}`, { replace: true })
+    }
 
     const gotoPage = (page) => {
-        setSearchValues({ page: page });
-    };
+        setSearchValues({ page: page })
+    }
 
     const handleClose = () => {
-        setRemoveModal(false);
-    };
+        setRemoveModal(false)
+    }
 
     // removes the element form dom
     const handleModal = (id) => {
-        setToRemove(id);
-        setRemoveModal(true);
-    };
+        setToRemove(id)
+        setRemoveModal(true)
+    }
 
     const handleRemove = () => {
-        dispatch(removeProduct(toRemove));
-    };
+        dispatch(removeProduct(toRemove))
+    }
 
     useEffect(() => {
-        dispatch(getProductByPaginate(searchValues));
-    }, [dispatch, searchValues]);
+        dispatch(getProductByPaginate(searchValues))
+    }, [dispatch, searchValues])
 
     useEffect(() => {
-        handleClose();
-        console.log('Search values: ', searchValues);
-        setRemoveModal(null);
+        handleClose()
+        console.log('Search values: ', searchValues)
+        setRemoveModal(null)
         if (notifications && notifications.remove_product) {
-            dispatch(getProductByPaginate(searchValues));
+            dispatch(getProductByPaginate(searchValues))
         }
-    }, [dispatch, notifications, searchValues]);
+    }, [dispatch, notifications, searchValues])
 
     return (
         <DashboardLayouts title="Products">
@@ -122,7 +122,7 @@ const AdminProducts = (props) => {
                 />
             </div>
         </DashboardLayouts>
-    );
-};
+    )
+}
 
-export default AdminProducts;
+export default AdminProducts

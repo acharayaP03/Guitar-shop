@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useFormik } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react'
+import { useFormik } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
 
-import UploadImage from './uploadImage';
-import ImageViewer from './imageViewer';
-import DashboardLayouts from 'hoc/dashboard.layouts';
-import { Loader, errorHelper } from 'utils/tools';
-import { validation, formValues, getValuesToEdit } from './formvalues';
+import UploadImage from './uploadImage'
+import ImageViewer from './imageViewer'
+import DashboardLayouts from 'hoc/dashboard.layouts'
+import { Loader, errorHelper } from 'utils/tools'
+import { validation, formValues, getValuesToEdit } from './formvalues'
 
 import {
     TextField,
@@ -16,76 +16,76 @@ import {
     MenuItem,
     FormControl,
     FormHelperText,
-} from '@material-ui/core';
+} from '@material-ui/core'
 
-import { getAllBrands } from 'store/actions/brands.actions';
-import { useNavigate, useParams } from 'react-router-dom';
-import { productEdit, productsById } from 'store/actions/products.action';
-import { clearCurrentProduct } from 'store/actions';
+import { getAllBrands } from 'store/actions/brands.actions'
+import { useNavigate, useParams } from 'react-router-dom'
+import { productEdit, productsById } from 'store/actions/products.action'
+import { clearCurrentProduct } from 'store/actions'
 
-const EditProduct = (props) => {
-    const [values, setValues] = useState(formValues);
-    const [loading, setLoading] = useState(false);
-    const products = useSelector((state) => state.products);
-    const notifications = useSelector((state) => state.notification);
-    const brands = useSelector((state) => state.brands);
-    const dispatch = useDispatch();
-    const navigation = useNavigate();
-    const { id } = useParams();
+const EditProduct = () => {
+    const [values, setValues] = useState(formValues)
+    const [loading, setLoading] = useState(false)
+    const products = useSelector((state) => state.products)
+    const notifications = useSelector((state) => state.notification)
+    const brands = useSelector((state) => state.brands)
+    const dispatch = useDispatch()
+    const navigation = useNavigate()
+    const { id } = useParams()
 
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: values,
         validationSchema: validation,
         onSubmit: (values) => {
-            handleSubmit(values);
+            handleSubmit(values)
         },
-    });
+    })
 
     const handleSubmit = (values) => {
-        setLoading(true);
-        dispatch(productEdit(values, id));
-    };
+        setLoading(true)
+        dispatch(productEdit(values, id))
+    }
 
     const deleteImage = (index) => {
-        const imageArray = formik.values.images;
-        imageArray.splice(index, 1);
-        formik.setFieldValue('images', imageArray);
-    };
+        const imageArray = formik.values.images
+        imageArray.splice(index, 1)
+        formik.setFieldValue('images', imageArray)
+    }
 
     const handlePicValue = (pic) => {
-        const picArray = formik.values.images;
-        picArray.push(pic.url);
-        formik.setFieldValue('images', picArray);
-    };
+        const picArray = formik.values.images
+        picArray.push(pic.url)
+        formik.setFieldValue('images', picArray)
+    }
 
     useEffect(() => {
         if (notifications && notifications.success) {
-            setLoading(false);
+            setLoading(false)
         }
         if (notifications && notifications.error) {
-            setLoading(false);
+            setLoading(false)
         }
-    }, [notifications, navigation]);
+    }, [notifications, navigation])
 
     useEffect(() => {
         if (products && products.productById) {
-            setValues(getValuesToEdit(products.productById));
+            setValues(getValuesToEdit(products.productById))
         }
-    }, [products]);
+    }, [products])
 
     useEffect(() => {
-        dispatch(getAllBrands());
+        dispatch(getAllBrands())
         if (id) {
-            dispatch(productsById(id));
+            dispatch(productsById(id))
         }
-    }, [dispatch, id]);
+    }, [dispatch, id])
 
     useEffect(() => {
         return () => {
-            dispatch(clearCurrentProduct());
-        };
-    }, [dispatch]);
+            dispatch(clearCurrentProduct())
+        }
+    }, [dispatch])
     return (
         <DashboardLayouts title="Add Product">
             {loading ? (
@@ -251,7 +251,7 @@ const EditProduct = (props) => {
                 </>
             )}
         </DashboardLayouts>
-    );
-};
+    )
+}
 
-export default EditProduct;
+export default EditProduct

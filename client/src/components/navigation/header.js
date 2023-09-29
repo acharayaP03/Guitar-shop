@@ -1,12 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
 const Header = ({ users, signOutUsers }) => {
     return (
         <header className="bck_b_light">
             <div className="container">
                 <div className="left">
-                    <div className="logo">WAVES</div>
+                    <div className="logo">Add-lib</div>
                 </div>
                 <div className="right">
                     <div className="top">
@@ -35,7 +35,7 @@ const Header = ({ users, signOutUsers }) => {
                 </div>
             </div>
         </header>
-    );
-};
+    )
+}
 
-export default Header;
+export default Header

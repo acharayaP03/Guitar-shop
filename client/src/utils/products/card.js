@@ -1,10 +1,10 @@
-import React from 'react';
-import { renderCardImage, WavesButton } from '../tools';
+import React from 'react'
+import { renderCardImage, WavesButton } from '../tools'
 
 const Card = (props) => {
-    const handleAddToCart = (item) => {
-        alert('Add to cart');
-    };
+    const handleAddToCart = () => {
+        alert('Add to cart')
+    }
     return (
         <div className={`card_item_wrapper ${props.grid ? 'grid_bars' : ''}`}>
             <div
@@ -47,7 +47,7 @@ const Card = (props) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Card;
+export default Card
