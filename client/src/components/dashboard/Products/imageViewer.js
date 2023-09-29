@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import React, { useState } from 'react'
+import { Modal, Button } from 'react-bootstrap'
 
 const ImageViewer = (props) => {
-    const [idToDelete, setIdToDelete] = useState(null);
-    const [show, setShow] = useState(false);
+    const [idToDelete, setIdToDelete] = useState(null)
+    const [show, setShow] = useState(false)
 
     const handleClose = () => {
-        setShow(false);
-    };
+        setShow(false)
+    }
 
-    const handleShow = (index) => {
-        setIdToDelete(idToDelete);
-        setShow(true);
-    };
+    const handleShow = () => {
+        setIdToDelete(idToDelete)
+        setShow(true)
+    }
 
     const confirmDelete = () => {
-        props.deleteImage(idToDelete);
-        handleClose();
-        setIdToDelete(null);
-    };
+        props.deleteImage(idToDelete)
+        handleClose()
+        setIdToDelete(null)
+    }
 
     return (
         <>
@@ -52,7 +52,7 @@ const ImageViewer = (props) => {
                 </Modal.Footer>
             </Modal>
         </>
-    );
-};
+    )
+}
 
-export default ImageViewer;
+export default ImageViewer

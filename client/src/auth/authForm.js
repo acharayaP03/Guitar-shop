@@ -47,7 +47,7 @@ const AuthForm = (props) => {
         } else {
             setLoading(false)
         }
-    }, [notification, props])
+    }, [notification, navigation])
 
     return (
         <>

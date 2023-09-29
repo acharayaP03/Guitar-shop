@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import DashbordLayouts from 'hoc/dashboard.layouts';
-import UploadImage from './uploadImage';
-import { useFormik } from 'formik';
-import { validation } from './formvalues';
-import { errorHelper, Loader } from 'utils/tools';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllBrands } from 'store/actions/brands.actions';
+import React, { useEffect, useState } from 'react'
+import DashbordLayouts from 'hoc/dashboard.layouts'
+import UploadImage from './uploadImage'
+import { useFormik } from 'formik'
+import { validation } from './formvalues'
+import { errorHelper, Loader } from 'utils/tools'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllBrands } from 'store/actions/brands.actions'
 
 import {
     TextField,
@@ -16,16 +16,16 @@ import {
     MenuItem,
     FormControl,
     FormHelperText,
-} from '@material-ui/core';
-import { addProduct } from '../../../store/actions/products.action';
-import ImageViewer from './imageViewer';
+} from '@material-ui/core'
+import { addProduct } from '../../../store/actions/products.action'
+import ImageViewer from './imageViewer'
 
-const AddProduct = (props) => {
-    const [loading, setLoading] = useState(false);
-    const notifications = useSelector((state) => state.notification);
-    const brands = useSelector((state) => state.brands);
-    const dispatch = useDispatch();
-    const navigation = useNavigate();
+const AddProduct = () => {
+    const [loading, setLoading] = useState(false)
+    const notifications = useSelector((state) => state.notification)
+    const brands = useSelector((state) => state.brands)
+    const dispatch = useDispatch()
+    const navigation = useNavigate()
 
     const formik = useFormik({
         initialValues: {
@@ -41,40 +41,40 @@ const AddProduct = (props) => {
         },
         validationSchema: validation,
         onSubmit: (values) => {
-            handleSubmit(values);
+            handleSubmit(values)
         },
-    });
+    })
 
     const handleSubmit = (data) => {
-        setLoading(true);
-        dispatch(addProduct(data));
-    };
+        setLoading(true)
+        dispatch(addProduct(data))
+    }
 
     const deleteImage = (index) => {
-        const imageArray = formik.values.images;
-        imageArray.splice(index, 1);
-        formik.setFieldValue('images', imageArray);
-    };
+        const imageArray = formik.values.images
+        imageArray.splice(index, 1)
+        formik.setFieldValue('images', imageArray)
+    }
 
     const handlePicValue = (pic) => {
-        const picArray = formik.values.images;
-        picArray.push(pic.url);
-        formik.setFieldValue('images', picArray);
-    };
+        const picArray = formik.values.images
+        picArray.push(pic.url)
+        formik.setFieldValue('images', picArray)
+    }
 
     useEffect(() => {
         if (notifications && notifications.success) {
-            setLoading(false);
-            navigation('/dashboard/admin/admin_products', { replace: true });
+            setLoading(false)
+            navigation('/dashboard/admin/admin_products', { replace: true })
         }
         if (notifications && notifications.error) {
-            setLoading(false);
+            setLoading(false)
         }
-    }, [notifications, navigation]);
+    }, [notifications, navigation])
 
     useEffect(() => {
-        dispatch(getAllBrands());
-    }, [dispatch]);
+        dispatch(getAllBrands())
+    }, [dispatch])
 
     return (
         <DashbordLayouts title="Add Product">
@@ -241,7 +241,7 @@ const AddProduct = (props) => {
                 </>
             )}
         </DashbordLayouts>
-    );
-};
+    )
+}
 
-export default AddProduct;
+export default AddProduct

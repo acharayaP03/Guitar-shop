@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { useFormik } from 'formik';
+import React, { useEffect, useState } from 'react'
+import { useFormik } from 'formik'
 
-import * as Yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
+import * as Yup from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { errorHelper, Loader } from 'utils/tools';
-import { Modal } from 'react-bootstrap';
+import { errorHelper, Loader } from 'utils/tools'
+import { Modal } from 'react-bootstrap'
 
-import { TextField, Button, Stepper, StepLabel, Step } from '@material-ui/core';
-import usersReducer from 'store/reducers/users.reducer';
-import { changeUserEmail } from 'store/actions/user.action';
+import { TextField, Button, Stepper, StepLabel, Step } from '@material-ui/core'
+
+import { changeUserEmail } from 'store/actions/user.action'
 
 const EmailStepper = ({ users }) => {
-    const [loading, setLoading] = useState(false);
-    const [emailModal, setEmailModal] = useState(false);
-    const [activeStep, setActiveStep] = useState(0);
-    const notification = useSelector((state) => state.notification);
-    const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false)
+    const [emailModal, setEmailModal] = useState(false)
+    const [activeStep, setActiveStep] = useState(0)
+    const notification = useSelector((state) => state.notification)
+    const dispatch = useDispatch()
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -26,35 +26,35 @@ const EmailStepper = ({ users }) => {
                 .required('Previous email is required.')
                 .email('Please provide valid email.')
                 .test('match', 'Please check your email', (email) => {
-                    return email === users.data.email;
+                    return email === users.data.email
                 }),
             newemail: Yup.string()
                 .required('Please provide new email.')
                 .email('Please provide valid email.')
                 .test('match', 'Please check your email', (newemail) => {
-                    return newemail !== users.data.email;
+                    return newemail !== users.data.email
                 }),
         }),
         onSubmit: (values) => {
-            setLoading(true);
-            dispatch(changeUserEmail(values));
+            setLoading(true)
+            dispatch(changeUserEmail(values))
         },
-    });
+    })
     const steps = [
         'Enter previous email',
         'Enter new email',
         'Please confirm new email',
-    ];
-    const closeModal = () => setEmailModal(false);
-    const openModal = () => setEmailModal(true);
+    ]
+    const closeModal = () => setEmailModal(false)
+    const openModal = () => setEmailModal(true)
 
     const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    };
+        setActiveStep((prevActiveStep) => prevActiveStep + 1)
+    }
 
     const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
+        setActiveStep((prevActiveStep) => prevActiveStep - 1)
+    }
 
     const nextBtn = () => (
         <Button
@@ -65,20 +65,20 @@ const EmailStepper = ({ users }) => {
         >
             Next
         </Button>
-    );
+    )
 
     const backBtn = () => (
         <Button className="mt-3 ml-2" variant="contained" onClick={handleBack}>
             Back
         </Button>
-    );
+    )
 
     useEffect(() => {
         if (notification && notification.success) {
-            closeModal();
+            closeModal()
         }
-        setLoading(false);
-    }, [notification]);
+        setLoading(false)
+    }, [notification])
 
     return (
         <>
@@ -108,12 +108,12 @@ const EmailStepper = ({ users }) => {
                 </Modal.Header>
                 <Modal.Body>
                     <Stepper activeStep={activeStep}>
-                        {steps.map((label, index) => {
+                        {steps.map((label) => {
                             return (
                                 <Step key={label}>
                                     <StepLabel>{label}</StepLabel>
                                 </Step>
-                            );
+                            )
                         })}
                     </Stepper>
                     <form
@@ -175,7 +175,7 @@ const EmailStepper = ({ users }) => {
                 </Modal.Body>
             </Modal>
         </>
-    );
-};
+    )
+}
 
-export default EmailStepper;
+export default EmailStepper

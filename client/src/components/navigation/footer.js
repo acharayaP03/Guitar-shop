@@ -1,16 +1,16 @@
-import React from 'react';
+import React from 'react'
 
-import ContactsIcon from '@material-ui/icons/Contacts';
-import TimelapseIcon from '@material-ui/icons/Timelapse';
-import PhoneIcon from '@material-ui/icons/Phone';
-import EmailIcon from '@material-ui/icons/Email';
+import ContactsIcon from '@material-ui/icons/Contacts'
+import TimelapseIcon from '@material-ui/icons/Timelapse'
+import PhoneIcon from '@material-ui/icons/Phone'
+import EmailIcon from '@material-ui/icons/Email'
 //import { useSelector } from 'react-redux';
 
 const Footer = () => {
     return (
         <footer className="bck_b_dark">
             <div className="container">
-                <div className="logo">WAVES</div>
+                <div className="logo">Add-Lib</div>
                 <div className="wrapper">
                     <div className="left">
                         <h2>Contact information</h2>
@@ -40,7 +40,7 @@ const Footer = () => {
                                 <EmailIcon />
                                 <div className="nfo">
                                     <div>Email</div>
-                                    <div>waves@gmail.com</div>
+                                    <div>add.lib@gmail.com</div>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +61,7 @@ const Footer = () => {
                 </div>
             </div>
         </footer>
-    );
-};
+    )
+}
 
-export default Footer;
+export default Footer
