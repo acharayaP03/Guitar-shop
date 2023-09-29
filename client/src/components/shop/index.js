@@ -3,7 +3,8 @@ import React, { useEffect, useReducer, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductByPaginate } from 'store/actions/products.action'
 import { getAllBrands } from 'store/actions/brands.actions'
-
+import Card from '../../utils/products/card.container'
+import PaginationComponent from 'utils/products/pagination'
 // eslint-disable-next-line no-unused-vars
 import GridOff from '@material-ui/icons/GridOff'
 import GridOn from '@material-ui/icons/GridOn'
@@ -24,10 +25,19 @@ const Shop = () => {
     )
 
     const { byPaginate } = useSelector((state) => state.products)
+
     const brands = useSelector((state) => state.brands)
     const dispatch = useDispatch()
 
+    const goToPage = (page) => {
+        setSearchValues({ page })
+    }
     const handleGridAction = () => setGrid(!grid)
+
+    const handleResetSearch = () =>
+        setSearchValues({
+            keywords: '',
+        })
     useEffect(() => {
         dispatch(getAllBrands())
     }, [dispatch])
@@ -68,17 +78,25 @@ const Shop = () => {
                             </div>
                             <div>
                                 {byPaginate && byPaginate.docs ? (
-                                    <> we have plenty of products to show</>
+                                    <>
+                                        <Card
+                                            grid={grid}
+                                            items={byPaginate.docs}
+                                            shop={true}
+                                        />
+                                    </>
                                 ) : null}
                             </div>
                         </div>
                         <div>
-                            <div className="shop_products">
-                                <div className="shop_grids clear products_row">
-                                    products
-                                </div>
+                            <div className="shop_pagination">
+                                <PaginationComponent
+                                    products={byPaginate}
+                                    prevPage={(page) => goToPage(page)}
+                                    nextPage={(page) => goToPage(page)}
+                                    resetSearch={() => handleResetSearch()}
+                                />
                             </div>
-                            <div className="shop_pagination">pagination</div>
                         </div>
                     </div>
                 </div>
