@@ -6,7 +6,7 @@ import { getAllBrands } from 'store/actions/brands.actions'
 import Card from '../../utils/products/card.container'
 import PaginationComponent from 'utils/products/pagination'
 import SearchBar from './searchBar'
-// eslint-disable-next-line no-unused-vars
+import CollapseCheckbox from './collapseCheckbox'
 import GridOff from '@material-ui/icons/GridOff'
 import GridOn from '@material-ui/icons/GridOn'
 
@@ -24,6 +24,13 @@ const Shop = () => {
         (state, newState) => ({ ...state, ...newState }),
         defaultValues
     )
+
+    const frets = [
+        { _id: 20, name: 20 },
+        { _id: 21, name: 21 },
+        { _id: 22, name: 22 },
+        { _id: 24, name: 24 },
+    ]
 
     const { byPaginate } = useSelector((state) => state.products)
 
@@ -44,6 +51,35 @@ const Shop = () => {
     const handleKeywords = (values) => {
         setSearchValues({ keywords: values, page: 1 })
     }
+
+    const handlePrice = (value) => {
+        const data = [0, 5000]
+        for (let key in data) {
+            if (data[key]._id === parseInt(value)) {
+                return data[key].array
+            }
+        }
+        return data
+    }
+    const handleFilters = (filters, category) => {
+        const newSearchValues = { ...searchValues }
+        newSearchValues[category] = filters
+
+        if (category === 'brand') {
+            setSearchValues({ brand: filters, page: 1 })
+        }
+
+        if (category === 'frets') {
+            setSearchValues({ frets: filters, page: 1 })
+        }
+
+        if (category === 'price') {
+            let priceValues = handlePrice(filters)
+            newSearchValues['min'] = priceValues[0]
+            newSearchValues['max'] = priceValues[1]
+        }
+        setSearchValues(newSearchValues)
+    }
     useEffect(() => {
         dispatch(getAllBrands())
     }, [dispatch])
@@ -52,6 +88,7 @@ const Shop = () => {
     useEffect(() => {
         dispatch(getProductByPaginate(searchValues))
     }, [searchValues, dispatch])
+
     return (
         <div className="page_container">
             <div className="page_top">
@@ -64,7 +101,24 @@ const Shop = () => {
             <div className="container">
                 <div className="shop_wrapper">
                     <div className="left">
-                        collapse brand collapse frets collapse price
+                        <CollapseCheckbox
+                            initState={true}
+                            title="Brands"
+                            list={brands.all}
+                            handleFilters={(filters) =>
+                                handleFilters(filters, 'brand')
+                            }
+                        />
+
+                        <CollapseCheckbox
+                            initState={false}
+                            title="Frets"
+                            list={frets}
+                            handleFilters={(filters) => {
+                                handleFilters(filters, 'frets')
+                            }}
+                        />
+                        <div>brand collapse frets collapse price</div>
                     </div>
                     <div className="right">
                         <div className="shop_options">
