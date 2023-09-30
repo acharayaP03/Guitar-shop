@@ -11,9 +11,8 @@ import {
 } from '@material-ui/core'
 
 const CollapseCheckbox = ({ initState, title, list, handleFilters }) => {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(initState)
     const [checked, setChecked] = useState([])
-    const [state, setState] = useState({ open: initState, checked: [] })
 
     const handleCollapseOpen = () => {
         setOpen(!open)

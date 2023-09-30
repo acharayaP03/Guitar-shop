@@ -25,6 +25,13 @@ const Shop = () => {
         defaultValues
     )
 
+    const frets = [
+        { _id: 20, name: 20 },
+        { _id: 21, name: 21 },
+        { _id: 22, name: 22 },
+        { _id: 24, name: 24 },
+    ]
+
     const { byPaginate } = useSelector((state) => state.products)
 
     const brands = useSelector((state) => state.brands)
@@ -58,6 +65,14 @@ const Shop = () => {
         const newSearchValues = { ...searchValues }
         newSearchValues[category] = filters
 
+        if (category === 'brand') {
+            setSearchValues({ brand: filters, page: 1 })
+        }
+
+        if (category === 'frets') {
+            setSearchValues({ frets: filters, page: 1 })
+        }
+
         if (category === 'price') {
             let priceValues = handlePrice(filters)
             newSearchValues['min'] = priceValues[0]
@@ -90,7 +105,18 @@ const Shop = () => {
                             initState={true}
                             title="Brands"
                             list={brands.all}
-                            handleFilters={(filters) => handleFilters()}
+                            handleFilters={(filters) =>
+                                handleFilters(filters, 'brand')
+                            }
+                        />
+
+                        <CollapseCheckbox
+                            initState={false}
+                            title="Frets"
+                            list={frets}
+                            handleFilters={(filters) => {
+                                handleFilters(filters, 'frets')
+                            }}
                         />
                         <div>brand collapse frets collapse price</div>
                     </div>
