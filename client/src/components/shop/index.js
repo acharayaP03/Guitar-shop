@@ -6,6 +6,7 @@ import { getAllBrands } from 'store/actions/brands.actions'
 import Card from '../../utils/products/card.container'
 import PaginationComponent from 'utils/products/pagination'
 import SearchBar from './searchBar'
+import RangeSelect from './rangeSelect'
 import CollapseCheckbox from './collapseCheckbox'
 import GridOff from '@material-ui/icons/GridOff'
 import GridOn from '@material-ui/icons/GridOn'
@@ -52,15 +53,6 @@ const Shop = () => {
         setSearchValues({ keywords: values, page: 1 })
     }
 
-    const handlePrice = (value) => {
-        const data = [0, 5000]
-        for (let key in data) {
-            if (data[key]._id === parseInt(value)) {
-                return data[key].array
-            }
-        }
-        return data
-    }
     const handleFilters = (filters, category) => {
         const newSearchValues = { ...searchValues }
         newSearchValues[category] = filters
@@ -72,13 +64,12 @@ const Shop = () => {
         if (category === 'frets') {
             setSearchValues({ frets: filters, page: 1 })
         }
-
-        if (category === 'price') {
-            let priceValues = handlePrice(filters)
-            newSearchValues['min'] = priceValues[0]
-            newSearchValues['max'] = priceValues[1]
-        }
         setSearchValues(newSearchValues)
+    }
+
+    const handleRange = (values) => {
+        console.log(values)
+        setSearchValues({ min: values[0], max: values[1], page: 1 })
     }
     useEffect(() => {
         dispatch(getAllBrands())
@@ -118,7 +109,11 @@ const Shop = () => {
                                 handleFilters(filters, 'frets')
                             }}
                         />
-                        <div>brand collapse frets collapse price</div>
+                        <RangeSelect
+                            title="Price Range"
+                            initState={false}
+                            handleRange={(values) => handleRange(values)}
+                        />
                     </div>
                     <div className="right">
                         <div className="shop_options">
