@@ -993,12 +993,13 @@ footer .business_nfo .nfo {
 }
 
 .modal-90w {
-    width: 90%;
+    width: 60%;
     max-width: none !important;
 }
 
 .modal-90w .modal-content {
     background-color: #0000007a;
+    height: 800px !important;
 }
 
 .modal-90w button.close {
