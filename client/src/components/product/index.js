@@ -1,0 +1,57 @@
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { productsById } from 'store/actions/products.action'
+import { Loader } from 'utils/tools'
+import { useParams } from 'react-router-dom'
+import { clearCurrentProduct } from 'store/actions'
+import ProductInfo from './detail'
+import { renderCardImage } from 'utils/tools'
+const Product = (props) => {
+    const { id } = useParams()
+    const products = useSelector((state) => state.products)
+    console.log('products', products)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(productsById(id))
+    }, [dispatch, id])
+
+    useEffect(() => {
+        return () => {
+            dispatch(clearCurrentProduct())
+        }
+    }, [dispatch])
+    return (
+        <div className="page_container">
+            <div className="page_top">
+                <div className="container">Product Detail</div>
+            </div>
+            <div className="container">
+                {products && products.productById ? (
+                    <div className="product_detail_wrapper">
+                        <div className="left">
+                            <div>
+                                <img
+                                    alt={products.productById.name}
+                                    src={renderCardImage(
+                                        products.productById.images
+                                    )}
+                                    style={{ cursor: 'pointer' }}
+                                    onClick={() => alert('add to cart..')}
+                                />
+                            </div>
+                        </div>
+                        <div className="right">
+                            <ProductInfo detail={products.productById} />
+                        </div>
+                    </div>
+                ) : (
+                    <Loader />
+                )}
+            </div>
+        </div>
+    )
+}
+
+export default Product

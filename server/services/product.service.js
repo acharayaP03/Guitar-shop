@@ -31,7 +31,7 @@ const addProduct = async (body) =>{
  */
 const getProductById = async (id) =>{
     try{
-        const product = await Product.findById(id)
+        const product = await Product.findById(id).populate('brand');
         if(!product){
             throw new ApiError(httpStatus.NOT_FOUND, 'Your product not found, please try again.')
         }

@@ -11,7 +11,7 @@ import RegisterLogin from './auth'
 import Home from './components/home'
 import Footer from './components/navigation/footer'
 import Shop from 'components/shop'
-
+import Product from 'components/product'
 import UserDashboard from 'components/dashboard'
 import UserInfo from 'components/dashboard/user/info'
 import AdminProducts from 'components/dashboard/Products'
@@ -75,6 +75,10 @@ function App() {
                             />
                             <Route path="/" element={<Home />} />
                             <Route path="/shop" element={<Shop />} />
+                            <Route
+                                path="/product_detail/:id"
+                                element={<Product />}
+                            />
                         </Routes>
                     </MainLayouts>
                     <Footer />
