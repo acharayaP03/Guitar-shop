@@ -6,6 +6,7 @@ import { Loader } from 'utils/tools'
 import { useParams } from 'react-router-dom'
 import { clearCurrentProduct } from 'store/actions'
 import ProductInfo from './detail'
+import { renderCardImage } from 'utils/tools'
 const Product = (props) => {
     const { id } = useParams()
     const products = useSelector((state) => state.products)
@@ -30,7 +31,16 @@ const Product = (props) => {
                 {products && products.productById ? (
                     <div className="product_detail_wrapper">
                         <div className="left">
-                            <div style={{ width: '500px' }}></div>
+                            <div>
+                                <img
+                                    alt={products.productById.name}
+                                    src={renderCardImage(
+                                        products.productById.images
+                                    )}
+                                    style={{ cursor: 'pointer' }}
+                                    onClick={() => alert('add to cart..')}
+                                />
+                            </div>
                         </div>
                         <div className="right">
                             <ProductInfo detail={products.productById} />

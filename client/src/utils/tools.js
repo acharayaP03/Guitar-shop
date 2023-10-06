@@ -1,11 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import AddShoppingCartOutlined from '@material-ui/icons/AddShoppingCartOutlined';
-import { CircularProgress } from '@material-ui/core';
-import { toast } from 'react-toastify';
-import cookie from 'react-cookies';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import AddShoppingCartOutlined from '@material-ui/icons/AddShoppingCartOutlined'
+import { CircularProgress } from '@material-ui/core'
+import { toast } from 'react-toastify'
+import cookie from 'react-cookies'
 export const WavesButton = (props) => {
-    let template = '';
+    let template = ''
 
     switch (props.type) {
         case 'default':
@@ -21,14 +21,14 @@ export const WavesButton = (props) => {
                 >
                     {props.title}
                 </Link>
-            );
-            break;
+            )
+            break
         case 'bag_link':
             template = (
                 <div
                     className="bag_link"
                     onClick={() => {
-                        props.runAction();
+                        props.runAction()
                     }}
                     style={{ ...props.style }}
                 >
@@ -36,22 +36,37 @@ export const WavesButton = (props) => {
                         style={{ fontSize: props.iconSize }}
                     />
                 </div>
-            );
-            break;
+            )
+            break
+        case 'add_to_cart_link':
+            template = (
+                <div
+                    className="add_to_cart_link"
+                    onClick={() => {
+                        props.runAction()
+                    }}
+                >
+                    <AddShoppingCartOutlined
+                        style={{ fontSize: props.iconSize }}
+                    />
+                    Add to cart
+                </div>
+            )
+            break
         default:
-            template = '';
+            template = ''
     }
 
-    return template;
-};
+    return template
+}
 
 export const renderCardImage = (image) => {
     if (image.length > 0) {
-        return image[0];
+        return image[0]
     } else {
-        return '/images/img.png';
+        return '/images/img.png'
     }
-};
+}
 /**
  * Loader when request is sent..
  * @param full
@@ -62,7 +77,7 @@ export const Loader = ({ full }) => (
     <div className={`root_loader ${full ? 'full' : ''}`}>
         <CircularProgress />
     </div>
-);
+)
 
 /**
  * Toast to show notifications..
@@ -75,17 +90,17 @@ export const showToast = (type, msg) => {
         case 'SUCCESS':
             toast.success(msg, {
                 position: toast.POSITION.BOTTOM_RIGHT,
-            });
-            break;
+            })
+            break
         case 'ERROR':
             toast.error(msg, {
                 position: toast.POSITION.BOTTOM_RIGHT,
-            });
-            break;
+            })
+            break
         default:
-            return false;
+            return false
     }
-};
+}
 
 export const errorHelper = (formik, value) => ({
     error: formik.errors[value] && formik.touched[value] ? true : false,
@@ -93,19 +108,19 @@ export const errorHelper = (formik, value) => ({
         formik.errors[value] && formik.touched[value]
             ? formik.errors[value]
             : null,
-});
+})
 
 /**
  * for user auto sign in
  */
-export const getTokenCookie = () => cookie.load('x-access-token');
+export const getTokenCookie = () => cookie.load('x-access-token')
 export const removeTokenCookie = () =>
-    cookie.remove('x-access-token', { path: '/' });
+    cookie.remove('x-access-token', { path: '/' })
 
 export const getAuthHeader = () => {
     return {
         headers: {
             Authorization: `Bearer ${getTokenCookie()}`,
         },
-    };
-};
+    }
+}
