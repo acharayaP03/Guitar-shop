@@ -3,9 +3,10 @@ import React, { useState } from 'react'
 import { renderCardImage, WavesButton } from '../tools'
 import { useSelector, useDispatch } from 'react-redux'
 import AddToCartHandler from 'utils/addToCartHandler'
+import { userAddToCart } from 'store/actions/user.action'
 const Card = (props) => {
     const user = useSelector((state) => state.users)
-    console.log('user', user)
+
     const [modal, setModal] = useState(false)
     const [errorType, setErrorType] = useState(null)
 
@@ -26,8 +27,7 @@ const Card = (props) => {
             setErrorType('verify')
             return false
         }
-
-        alert('dispatch add to cart')
+        dispatch(userAddToCart(item))
     }
     return (
         <div className={`card_item_wrapper ${props.grid ? 'grid_bars' : ''}`}>
