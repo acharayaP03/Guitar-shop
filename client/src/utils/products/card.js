@@ -1,9 +1,33 @@
-import React from 'react'
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react'
 import { renderCardImage, WavesButton } from '../tools'
-
+import { useSelector, useDispatch } from 'react-redux'
+import AddToCartHandler from 'utils/addToCartHandler'
 const Card = (props) => {
-    const handleAddToCart = () => {
-        alert('Add to cart')
+    const user = useSelector((state) => state.users)
+    console.log('user', user)
+    const [modal, setModal] = useState(false)
+    const [errorType, setErrorType] = useState(null)
+
+    const dispatch = useDispatch()
+
+    const handleClose = () => {
+        setModal(false)
+    }
+
+    const handleAddToCart = (item) => {
+        if (!user.auth) {
+            setModal(true)
+            setErrorType('auth')
+            return false
+        }
+        if (!user.data.varified) {
+            setModal(true)
+            setErrorType('verify')
+            return false
+        }
+
+        alert('dispatch add to cart')
     }
     return (
         <div className={`card_item_wrapper ${props.grid ? 'grid_bars' : ''}`}>
@@ -46,6 +70,12 @@ const Card = (props) => {
                     </div>
                 </div>
             </div>
+
+            <AddToCartHandler
+                modal={modal}
+                errorType={errorType}
+                handleClose={handleClose}
+            />
         </div>
     )
 }
