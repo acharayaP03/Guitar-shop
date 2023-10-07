@@ -31,7 +31,6 @@ const Product = (props) => {
 
     const { id } = useParams()
     const products = useSelector((state) => state.products)
-    console.log('products', products)
     const dispatch = useDispatch()
 
     useEffect(() => {

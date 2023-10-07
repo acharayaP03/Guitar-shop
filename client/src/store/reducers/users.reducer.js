@@ -3,7 +3,7 @@ import {
     CHANGE_USER_EMAIL,
     SIGN_OUT,
     UPDATE_USER_PROFILE,
-} from '../types';
+} from '../types'
 
 let DEFAULT_USER_STATE = {
     data: {
@@ -12,11 +12,11 @@ let DEFAULT_USER_STATE = {
         firstname: null,
         lastname: null,
         history: [],
-        verified: null,
+        varified: null,
     },
     auth: null,
     cart: [],
-};
+}
 
 export default function usersReducer(state = DEFAULT_USER_STATE, action) {
     switch (action.type) {
@@ -25,18 +25,18 @@ export default function usersReducer(state = DEFAULT_USER_STATE, action) {
                 ...state,
                 data: { ...state.data, ...action.payload.data },
                 auth: action.payload.auth,
-            };
+            }
         case SIGN_OUT:
             return {
                 ...state,
                 data: { ...DEFAULT_USER_STATE.data },
                 auth: false,
-            };
+            }
         case UPDATE_USER_PROFILE:
-            return { ...state, data: { ...action.payload } };
+            return { ...state, data: { ...action.payload } }
         case CHANGE_USER_EMAIL:
-            return { ...state, data: { ...state.data, email: action.payload } };
+            return { ...state, data: { ...state.data, email: action.payload } }
         default:
-            return state;
+            return state
     }
 }
