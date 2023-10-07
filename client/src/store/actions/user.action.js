@@ -100,7 +100,7 @@ export const updateUserProfile = (record) => {
                 firstname: profile.data.firstname,
                 lastname: profile.data.lastname,
             }
-            console.log(userData)
+
             dispatch(actions.updateUserProfile(userData))
             dispatch(actions.successGlobal('Profile has been updated...'))
         } catch (error) {
@@ -127,6 +127,20 @@ export const changeUserEmail = (data) => {
                     'Your email has been changed, remember to verify your email.'
                 )
             )
+        } catch (error) {
+            dispatch(actions.errorGlobal(error.response.data.message))
+        }
+    }
+}
+
+export const userAddToCart = (item) => {
+    return async (dispatch, getState) => {
+        try {
+            const cart = getState().users.cart
+
+            console.log('cart', cart, item)
+            dispatch(actions.userAddToCart([...cart, item]))
+            dispatch(actions.successGlobal(`${item.model}added to cart`))
         } catch (error) {
             dispatch(actions.errorGlobal(error.response.data.message))
         }
