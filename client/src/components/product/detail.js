@@ -1,15 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import { WavesButton } from 'utils/tools'
-
 import {
     LocalShipping,
     DoneOutline,
     SentimentDissatisfiedOutlined,
 } from '@material-ui/icons'
-
+import AddToCartHandler from 'utils/addToCartHandler'
 import { useSelector, useDispatch } from 'react-redux'
-
+import { userAddToCart } from 'store/actions/user.action'
 const freeShipping = (detail) => {
     return detail.shipping ? (
         <div>Free shipping for Australian location</div>
@@ -33,7 +32,7 @@ const showAvailableProduct = (detail) => {
     ) : (
         <div className="tag">
             <div>
-                <DoneOutline />
+                <SentimentDissatisfiedOutlined />
             </div>
             <div className="tag_text">
                 <div>
@@ -45,16 +44,14 @@ const showAvailableProduct = (detail) => {
     )
 }
 
-const showProductActions = (detail) => {
+const showProductActions = (detail, handleAction) => {
     return (
         <div className="product_actions">
             <div className="price">$ {detail.price}</div>
             <div className="cart">
                 <WavesButton
                     type="add_to_cart_link"
-                    runAction={() => {
-                        alert('add to cart')
-                    }}
+                    runAction={() => handleAction(detail)}
                 />
             </div>
         </div>
@@ -91,6 +88,27 @@ const showProdTags = (detail) => (
     </div>
 )
 const ProductInfo = (props) => {
+    const user = useSelector((state) => state.users)
+    const [modal, setModal] = useState(false)
+    const [errorType, setErrorType] = useState(null)
+    const dispatch = useDispatch()
+
+    const handleClose = () => setModal(false)
+
+    const handleAction = (item) => {
+        if (!user.auth) {
+            setModal(true)
+            setErrorType('auth')
+            return false
+        }
+        if (!user.data.varified) {
+            setModal(true)
+            setErrorType('verify')
+            return false
+        }
+        dispatch(userAddToCart(item))
+    }
+
     const detail = props.detail
     return (
         <div className="">
@@ -99,8 +117,22 @@ const ProductInfo = (props) => {
             </h1>
             <p>{detail.description}</p>
             {showProdTags(detail)}
-            {showProductActions(detail)}
+            <div className="product_actions">
+                <div className="price">$ {detail.price}</div>
+                <div className="cart">
+                    <WavesButton
+                        type="add_to_cart_link"
+                        runAction={() => handleAction(detail)}
+                    />
+                </div>
+            </div>
             {showProductSpecifications(detail)}
+
+            <AddToCartHandler
+                modal={modal}
+                errorType={errorType}
+                handleClose={handleClose}
+            />
         </div>
     )
 }

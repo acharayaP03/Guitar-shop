@@ -3,6 +3,7 @@ import {
     CHANGE_USER_EMAIL,
     SIGN_OUT,
     UPDATE_USER_PROFILE,
+    USER_ADD_TO_CART,
 } from '../types'
 
 let DEFAULT_USER_STATE = {
@@ -36,6 +37,9 @@ export default function usersReducer(state = DEFAULT_USER_STATE, action) {
             return { ...state, data: { ...action.payload } }
         case CHANGE_USER_EMAIL:
             return { ...state, data: { ...state.data, email: action.payload } }
+        case USER_ADD_TO_CART:
+            console.log(state, action.payload)
+            return { ...state, cart: action.payload }
         default:
             return state
     }
