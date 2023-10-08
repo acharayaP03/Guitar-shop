@@ -12,9 +12,16 @@ const UserCart = (props) => {
     const users = useSelector(state => state.users)
     const dispatch = useDispatch()
 
-    console.log('users state: ', users)
     const removeItems = (position) => {
         dispatch(userRemoveFromCart(position))
+    }
+
+    const calculateTotal = () => {
+        let total = 0;
+        users.cart.forEach((item) => {
+            total += parseInt(item.price, 10)
+        })
+        return total
     }
     return (
         <DashboardLayouts title="Your Cart">
@@ -24,6 +31,13 @@ const UserCart = (props) => {
                         products={users.cart}
                         removeItems={(position) => removeItems(position)}
                     />
+
+                    <div className="user_cart_sum">
+
+                        <div>
+                            Total amount: ${calculateTotal()}
+                        </div>
+                    </div>
                 </>
             ) : (
                 <div>
