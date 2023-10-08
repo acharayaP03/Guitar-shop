@@ -12,8 +12,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
  */
 root.render(
     <Provider store={ReduxStore()}>
-        <React.StrictMode>
-            <Routes />
-        </React.StrictMode>
+        <Routes />
     </Provider>
 );
