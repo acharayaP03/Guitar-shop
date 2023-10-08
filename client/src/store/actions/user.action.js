@@ -138,9 +138,8 @@ export const userAddToCart = (item) => {
         try {
             const cart = getState().users.cart
 
-            console.log('cart', cart, item)
             dispatch(actions.userAddToCart([...cart, item]))
-            dispatch(actions.successGlobal(`${item.model}added to cart`))
+            dispatch(actions.successGlobal(`${item.model} added to cart`))
         } catch (error) {
             dispatch(actions.errorGlobal(error.response.data.message))
         }

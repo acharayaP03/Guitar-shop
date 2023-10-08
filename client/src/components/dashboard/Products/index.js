@@ -86,7 +86,6 @@ const AdminProducts = () => {
 
     useEffect(() => {
         handleClose()
-        console.log('Search values: ', searchValues)
         setRemoveModal(null)
         if (notifications && notifications.remove_product) {
             dispatch(getProductByPaginate(searchValues))
