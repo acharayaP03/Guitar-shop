@@ -17,6 +17,7 @@ import UserInfo from 'components/dashboard/user/info'
 import AdminProducts from 'components/dashboard/Products'
 import AddProduct from 'components/dashboard/Products/addProduct'
 import EditProduct from 'components/dashboard/Products/editProduct'
+import UserCart from 'components/dashboard/user/cart'
 function App() {
     const [loading, setLoading] = useState(true)
     const users = useSelector((state) => state.users)
@@ -68,6 +69,11 @@ function App() {
                                 path="/dashboard/user/user_info"
                                 element={<Info />}
                             />
+                            <Route
+                                path="/dashboard/user/user_cart"
+                                element={<UserCart />}
+                            />
+
                             <Route path="/dashboard" element={<Dashboard />} />
                             <Route
                                 path="/sign_in"

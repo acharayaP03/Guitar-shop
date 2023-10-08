@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { legacy_createStore as createStore , applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk'; // for async call
 import appReducers from './reducers';
 

@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 import React, { useState } from 'react'
 import { WavesButton } from 'utils/tools'
 import {
@@ -39,20 +39,6 @@ const showAvailableProduct = (detail) => {
                     Sorry product is out of stock. Please contact us for more
                     information.
                 </div>
-            </div>
-        </div>
-    )
-}
-
-const showProductActions = (detail, handleAction) => {
-    return (
-        <div className="product_actions">
-            <div className="price">$ {detail.price}</div>
-            <div className="cart">
-                <WavesButton
-                    type="add_to_cart_link"
-                    runAction={() => handleAction(detail)}
-                />
             </div>
         </div>
     )

@@ -38,7 +38,6 @@ export default function usersReducer(state = DEFAULT_USER_STATE, action) {
         case CHANGE_USER_EMAIL:
             return { ...state, data: { ...state.data, email: action.payload } }
         case USER_ADD_TO_CART:
-            console.log(state, action.payload)
             return { ...state, cart: action.payload }
         default:
             return state
