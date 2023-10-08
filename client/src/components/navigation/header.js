@@ -1,7 +1,9 @@
 import React from 'react'
+
 import { Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 const Header = ({ users, signOutUsers }) => {
+
     return (
         <header className="bck_b_light">
             <div className="container">
@@ -13,7 +15,10 @@ const Header = ({ users, signOutUsers }) => {
                         {users.auth ? (
                             <>
                                 <div className="cart_link">
-                                    <span>1</span>
+                                    { users.cart.length > 0 ?
+                                        <span >{ users.cart.length}</span>
+                                        : null
+                                    }
                                     <Link to="/dashboard/user/user_cart">
                                         My cart
                                     </Link>
