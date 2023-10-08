@@ -32,7 +32,7 @@ const CartDetails = ({ products, removeItems }) => {
                     <div className="item btn">
 
                         <div className="cart_remove_btn"
-                             onClick={() => alert('remove')}
+                             onClick={() => removeItems()}
                         >
                             Remove
                         </div>

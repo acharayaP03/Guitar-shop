@@ -145,3 +145,17 @@ export const userAddToCart = (item) => {
         }
     }
 }
+
+export const userRemoveFromCart = (position) => {
+    return async (dispatch, getState) => {
+        try {
+            const cart = getState().users.cart
+            cart.splice(position, 1)
+
+            dispatch(actions.successGlobal(`item removed from cart`))
+            dispatch(actions.userAddToCart(cart))
+        } catch (error) {
+            dispatch(actions.errorGlobal(error.response.data.message))
+        }
+    }
+}

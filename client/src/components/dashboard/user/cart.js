@@ -4,6 +4,7 @@ import DashboardLayouts from 'hoc/dashboard.layouts'
 import { Loader } from 'utils/tools'
 import CartDetails from './cartDetails'
 import { useDispatch, useSelector } from 'react-redux'
+import { userRemoveFromCart} from "store/actions/user.action";
 
 const UserCart = (props) => {
     const [loading, setLoading] = useState(false)
@@ -12,8 +13,8 @@ const UserCart = (props) => {
     const dispatch = useDispatch()
 
     console.log('users state: ', users)
-    const removeItems = (itemId) => {
-        console.log(itemId)
+    const removeItems = (position) => {
+        dispatch(userRemoveFromCart(position))
     }
     return (
         <DashboardLayouts title="Your Cart">
@@ -21,7 +22,7 @@ const UserCart = (props) => {
                 <>
                     <CartDetails
                         products={users.cart}
-                        removeItems={(id) => removeItems(id)}
+                        removeItems={(position) => removeItems(position)}
                     />
                 </>
             ) : (
